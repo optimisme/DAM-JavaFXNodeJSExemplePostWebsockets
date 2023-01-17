@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public static int port = 3000;
+    public static String protocol = "http";
+    public static String host = "localhost";
+
     // Camps JavaFX a modificar
     public static Label consoleName = new Label();
     public static Label consoleDate = new Label();
@@ -69,29 +73,29 @@ public class Main extends Application {
         VBox vbox = new VBox(0);
         vbox.setAlignment(Pos.TOP_LEFT);
 
-        // Add button that calls "http://localhost:3000/dades" with POST of type "consola" and name "GameCube"
+        // Add button that calls "/dades" with POST of type "consola" and name "GameCube"
         Button buttonGC = new Button("GameCube");
         buttonGC.setOnAction(e -> {
             MsgPost msg = new MsgPost("consola", "GameCube");
-            UtilsHTTP.sendPOST("http://localhost:3000/dades", UtilsJSON.stringify(msg), (response) -> {
+            UtilsHTTP.sendPOST(protocol + "://" + host + ":" + port + "/dades", UtilsJSON.stringify(msg), (response) -> {
                 setConsola(response);
             });
         });
 
-        // Add button that calls "http://localhost:3000/dades" with POST of type "consola" and name "Xbox One"
+        // Add button that calls "/dades" with POST of type "consola" and name "Xbox One"
         Button buttonXO = new Button("Xbox One");
         buttonXO.setOnAction(e -> {
             MsgPost msg = new MsgPost("consola", "Xbox One");
-            UtilsHTTP.sendPOST("http://localhost:3000/dades", UtilsJSON.stringify(msg), (response) -> {
+            UtilsHTTP.sendPOST(protocol + "://" + host + ":" + port + "/dades", UtilsJSON.stringify(msg), (response) -> {
                 setConsola(response);
             });
         });
 
-        // Add button that calls "http://localhost:3000/dades" with POST of type "consola" and name "Playstatoin 3"
+        // Add button that calls "/dades" with POST of type "consola" and name "Playstatoin 3"
         Button buttonP3 = new Button("Playstation 3");
         buttonP3.setOnAction(e -> {
             MsgPost msg = new MsgPost("consola", "Playstation 3");
-            UtilsHTTP.sendPOST("http://localhost:3000/dades", UtilsJSON.stringify(msg), (response) -> {
+            UtilsHTTP.sendPOST(protocol + "://" + host + ":" + port + "/dades", UtilsJSON.stringify(msg), (response) -> {
                 setConsola(response);
             });
         });

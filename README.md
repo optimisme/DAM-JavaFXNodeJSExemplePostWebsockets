@@ -4,10 +4,10 @@ En aquest projecte hi ha un exemple de com comunicar JavaFX amb un servidor Node
 
 Captura amb JavaFX
 
-<img src="./ScreenshotJavaFX.png" width="200">
+<img src="./ScreenshotJavaFX.png" width="400">
 
 
 
 Captura amb Web
 
-![Captura](./ScreenshotWeb.png | width=200)
+<img src="./ScreenshotWeb.png" width="400">

@@ -7,13 +7,13 @@ const post = require('./post.js')
 const app = express()
 
 // Configurar el port del servidor HTTP
-const port = 3000
+const port = process.env.PORT || 3000
 
 // Publicar els arxius HTTP de la carpeta 'public'
 app.use(express.static('public'))
 
 // Activar el servidor HTTP
-app.listen(port, appListen)
+const httpServer = app.listen(port, appListen)
 function appListen () {
   console.log(`Example app listening for HTTP queries on: http://localhost:${port}`)
 }

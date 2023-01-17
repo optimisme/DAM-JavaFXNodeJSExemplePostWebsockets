@@ -1,0 +1,14 @@
+Aquest exemple de servidor mostra:
+
+- Com servir arxius de la carpeta "public"
+- Com crear crides GET amb "app.get"
+- Com crear crides POST amb "app.post"
+- Com comunicar-se amb el servidor a través de WebSockets
+
+Posar-lo en funcionament:
+
+npm run dev
+
+Per veure com funciona anar amb un navegador a la direcció:
+
+http://localhost:3000

@@ -1,0 +1,16 @@
+Aquest exemple de client mostra:
+
+- Com fer crides GET a un servidor
+- Com fer crides POST a un servidor enviant diferents missatges
+- Com enviar missatges a un servidor de WebSockets
+- Com rebre missatges d'un servidor de WebSockets
+
+Per fer-lo anar cal tenir primer el servidor NodeJS funcionant
+
+Fer-lo anar a Linux i OSX amb:
+
+./run.sh
+
+O a Windows
+
+.\run.bat

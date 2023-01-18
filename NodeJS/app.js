@@ -21,7 +21,7 @@ function appListen () {
 // Definir URL per les dades tipus POST
 app.post('/dades', getDades)
 async function getDades (req, res) {
-  let receivedPOST = await post.getPostData(req)
+  let receivedPOST = await post.getPostObject(req)
   let result = {};
 
   if (receivedPOST) {

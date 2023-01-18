@@ -28,20 +28,13 @@ async function getDades (req, res) {
     if (receivedPOST.type == "consola") {
       var arxiuText = await fs.readFile("./public/consoles/llista-dades.json", { encoding: 'utf8'})
       var objLlistaConsoles = JSON.parse(arxiuText)
-      result = { result: dadesConsola(objLlistaConsoles, receivedPOST.name) }
+      var objLlistaFiltrada = objLlistaConsoles.filter(function (obj) { return obj.name == receivedPOST.name })
+      if (objLlistaFiltrada.length > 0) {
+        result = { result: objLlistaFiltrada[0] }
+      }
     }
   }
 
   res.writeHead(200, { 'Content-Type': 'application/json' })
   res.end(JSON.stringify(result))
-}
-
-// Funció que cerca les dades d'una consola en una llista
-function dadesConsola (list, name) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].name == name) {
-      return list[i]
-    }
-  }
-  return null
 }

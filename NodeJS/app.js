@@ -24,14 +24,20 @@ async function getDades (req, res) {
   let receivedPOST = await post.getPostObject(req)
   let result = {};
 
+  var arxiuText = await fs.readFile("./public/consoles/llista-dades.json", { encoding: 'utf8'})
+  var objLlistaConsoles = JSON.parse(arxiuText)
+
   if (receivedPOST) {
     if (receivedPOST.type == "consola") {
-      var arxiuText = await fs.readFile("./public/consoles/llista-dades.json", { encoding: 'utf8'})
-      var objLlistaConsoles = JSON.parse(arxiuText)
       var objLlistaFiltrada = objLlistaConsoles.filter(function (obj) { return obj.name == receivedPOST.name })
       if (objLlistaFiltrada.length > 0) {
         result = { result: objLlistaFiltrada[0] }
       }
+    }
+    if (receivedPOST.type == "marques") {
+      var objLlistaMarques = objLlistaConsoles.map(function (obj) { return obj.brand })
+      let senseDuplicats = [...new Set(objLlistaMarques)]
+      result = { result: senseDuplicats } 
     }
   }
 

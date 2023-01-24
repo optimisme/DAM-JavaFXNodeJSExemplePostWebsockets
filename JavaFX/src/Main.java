@@ -100,6 +100,17 @@ public class Main extends Application {
             });
         });
 
+        Button buttonLl = new Button("Llista de consoles");
+        buttonLl.setOnAction(e -> {
+            MsgPostLlista msg = new MsgPostLlista("marques");
+            UtilsHTTP.sendPOST(protocol + "://" + host + ":" + port + "/dades", UtilsJSON.stringify(msg), (response) -> {
+                // System.out.println(response);
+
+                MsgResStringArr msgRes = (MsgResStringArr) UtilsJSON.parse(response, MsgResStringArr.class);
+                System.out.println(msgRes.result);
+            });
+        });
+
         // Set console information properties
         Label titol0 = new Label("Dades de la consola:");
         titol0.setPadding(new Insets(0, 0, 20, 0));
@@ -112,6 +123,7 @@ public class Main extends Application {
         vbox.getChildren().add(buttonGC);
         vbox.getChildren().add(buttonXO);
         vbox.getChildren().add(buttonP3);
+        vbox.getChildren().add(buttonLl);
         vbox.getChildren().add(vS0);
         vbox.getChildren().add(titol0);
         vbox.getChildren().add(consoleName);

@@ -100,7 +100,7 @@ public class Main extends Application {
             });
         });
 
-        Button buttonLl = new Button("Llista de consoles");
+        Button buttonLl = new Button("Llista de marques");
         buttonLl.setOnAction(e -> {
             MsgPostLlista msg = new MsgPostLlista("marques");
             UtilsHTTP.sendPOST(protocol + "://" + host + ":" + port + "/dades", UtilsJSON.stringify(msg), (response) -> {

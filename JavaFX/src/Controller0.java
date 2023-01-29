@@ -89,14 +89,16 @@ public class Controller0 implements Initializable {
         obj.put("type", "marques");
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
             JSONObject objResponse = new JSONObject(response);
-            JSONArray brandsObj = objResponse.getJSONArray("result");
-            ArrayList<String> brandsArr = new ArrayList<>();
-            for (int i = 0; i < brandsObj.length(); i++) {
-                brandsArr.add(brandsObj.getString(i));
+            if (!objResponse.getString("type").equals("error")) {
+                JSONArray brandsObj = objResponse.getJSONArray("result");
+                ArrayList<String> brandsArr = new ArrayList<>();
+                for (int i = 0; i < brandsObj.length(); i++) {
+                    brandsArr.add(brandsObj.getString(i));
+                }
+                choiceBox.getItems().clear();
+                choiceBox.getItems().addAll(brandsArr);
+                choiceBox.setValue(brandsArr.get(0));
             }
-            choiceBox.getItems().clear();
-            choiceBox.getItems().addAll(brandsArr);
-            choiceBox.setValue(brandsArr.get(0));
             hideLoading();
         });
     }
@@ -113,20 +115,22 @@ public class Controller0 implements Initializable {
     }
 
     private void setConsoleInfo (String response) {
-        JSONObject obj = new JSONObject(response);
-        JSONObject console = obj.getJSONObject("result");
+        JSONObject objResponse = new JSONObject(response);
+        if (!objResponse.getString("type").equals("error")) {
+            JSONObject console = objResponse.getJSONObject("result");
 
-        txtName.setText(console.getString("name"));
-        txtDate.setText(console.getString("date"));
-        txtBrand.setText(console.getString("brand"));
-
-        try{
-            Image image = new Image(Main.protocol + "://" + Main.host + ":" + Main.port + "/" + console.getString("image")); 
-            imgConsole.setImage(image); 
-            imgConsole.setFitWidth(200);
-            imgConsole.setPreserveRatio(true);
-        } catch (Exception e) {
-            e.printStackTrace();
+            txtName.setText(console.getString("name"));
+            txtDate.setText(console.getString("date"));
+            txtBrand.setText(console.getString("brand"));
+    
+            try{
+                Image image = new Image(Main.protocol + "://" + Main.host + ":" + Main.port + "/" + console.getString("image")); 
+                imgConsole.setImage(image); 
+                imgConsole.setFitWidth(200);
+                imgConsole.setPreserveRatio(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

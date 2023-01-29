@@ -41,11 +41,19 @@ public class UtilsHTTP {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                return "Error";
+                return "{ \"result\": \"error\" }";
             }
         };
         task.setOnSucceeded(event -> {
             callBack.accept(task.getValue());
+            executorService.shutdownNow();
+        });
+        task.setOnCancelled(event -> {
+            callBack.accept("{ \"result\": \"error\" }");
+            executorService.shutdownNow();
+        });
+        task.setOnFailed(event -> {
+            callBack.accept("{ \"result\": \"error\" }");
             executorService.shutdownNow();
         });
         executorService.execute(task);
@@ -90,7 +98,7 @@ public class UtilsHTTP {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                return "{}";
+                return "{ \"result\": \"error\" }";
             }
         };
         task.setOnSucceeded(event -> {
@@ -98,11 +106,11 @@ public class UtilsHTTP {
             executorService.shutdownNow();
         });
         task.setOnCancelled(event -> {
-            callBack.accept("{}");
+            callBack.accept("{ \"result\": \"error\" }");
             executorService.shutdownNow();
         });
         task.setOnFailed(event -> {
-            callBack.accept("{}");
+            callBack.accept("{ \"result\": \"error\" }");
             executorService.shutdownNow();
         });
         executorService.execute(task);       

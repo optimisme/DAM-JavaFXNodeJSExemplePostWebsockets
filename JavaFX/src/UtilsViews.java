@@ -38,6 +38,18 @@ public class UtilsViews {
         controllers.add(loader.getController());
     }
 
+    // Get controller by view id (viewId)
+    public static Object getController(String viewId) {
+        int index = 0;
+        for (Node n : parentContainer.getChildren()) {
+            if (n.getId().equals(viewId)) {
+                return controllers.get(index);
+            }
+            index++;
+        }
+        return null;
+    }
+
     // Set visible view by its id (viewId)
     public static void setView(String viewId) {
 

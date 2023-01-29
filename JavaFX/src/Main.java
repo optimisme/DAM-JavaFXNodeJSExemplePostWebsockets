@@ -37,7 +37,7 @@ public class Main extends Application {
             Platform.runLater(()->{ 
                 // Fer aquí els canvis a la interficie
                 JSONObject msgObj = new JSONObject(response);
-                Controller1 ctrl = (Controller1) UtilsViews.controllers.get(1);
+                Controller1 ctrl = (Controller1) UtilsViews.getController("View1");
                 ctrl.receiveMessage(msgObj);
             });
         });

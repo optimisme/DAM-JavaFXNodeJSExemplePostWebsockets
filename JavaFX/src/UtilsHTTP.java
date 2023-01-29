@@ -90,11 +90,19 @@ public class UtilsHTTP {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                return "Error";
+                return "{}";
             }
         };
         task.setOnSucceeded(event -> {
             callBack.accept(task.getValue());
+            executorService.shutdownNow();
+        });
+        task.setOnCancelled(event -> {
+            callBack.accept("{}");
+            executorService.shutdownNow();
+        });
+        task.setOnFailed(event -> {
+            callBack.accept("{}");
             executorService.shutdownNow();
         });
         executorService.execute(task);       

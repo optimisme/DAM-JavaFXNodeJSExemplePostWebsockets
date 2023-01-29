@@ -1,5 +1,10 @@
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
@@ -80,34 +85,43 @@ public class Controller0 implements Initializable {
     @FXML
     public void listBrands() {
         showLoading();
-        MsgPostLlista msg = new MsgPostLlista("marques");
-        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", UtilsJSON.stringify(msg), (response) -> {
-            MsgResStringArr brands = (MsgResStringArr) UtilsJSON.parse(response, MsgResStringArr.class);
+        JSONObject obj = new JSONObject("{}");
+        obj.put("type", "marques");
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
+            JSONObject objResponse = new JSONObject(response);
+            JSONArray brandsObj = objResponse.getJSONArray("result");
+            ArrayList<String> brandsArr = new ArrayList<>();
+            for (int i = 0; i < brandsObj.length(); i++) {
+                brandsArr.add(brandsObj.getString(i));
+            }
             choiceBox.getItems().clear();
-            choiceBox.getItems().addAll(brands.result);
-            choiceBox.setValue(brands.result.get(0));
+            choiceBox.getItems().addAll(brandsArr);
+            choiceBox.setValue(brandsArr.get(0));
             hideLoading();
         });
     }
 
     private void loadConsoleInfo (String consoleName) {
         showLoading();
-        MsgPost msg = new MsgPost("consola", consoleName);
-        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", UtilsJSON.stringify(msg), (response) -> {
+        JSONObject obj = new JSONObject("{}");
+        obj.put("type", "consola");
+        obj.put("name", consoleName);
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
             setConsoleInfo(response);
             hideLoading();
         });
     }
 
     private void setConsoleInfo (String response) {
-        MsgResponse msg = (MsgResponse) UtilsJSON.parse(response, MsgResponse.class);
-        MsgConsola console = msg.result;
-        txtName.setText(console.name);
-        txtDate.setText(console.date);
-        txtBrand.setText(console.brand);
+        JSONObject obj = new JSONObject(response);
+        JSONObject console = obj.getJSONObject("result");
+
+        txtName.setText(console.getString("name"));
+        txtDate.setText(console.getString("date"));
+        txtBrand.setText(console.getString("brand"));
 
         try{
-            Image image = new Image(Main.protocol + "://" + Main.host + ":" + Main.port + "/" + console.image); 
+            Image image = new Image(Main.protocol + "://" + Main.host + ":" + Main.port + "/" + console.getString("image")); 
             imgConsole.setImage(image); 
             imgConsole.setFitWidth(200);
             imgConsole.setPreserveRatio(true);

@@ -37,7 +37,7 @@ public class Controller0 implements Initializable {
 
         // Start choiceBox
         choiceBox.setOnAction((event) -> {
-            System.out.println("Selected brand" + choiceBox.getValue());
+            System.out.println("Selected brand: " + choiceBox.getValue());
         });
 
         // Start loading animation

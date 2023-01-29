@@ -30,12 +30,14 @@ async function getDades (req, res) {
   if (receivedPOST) {
     if (receivedPOST.type == "consola") {
       var objLlistaFiltrada = objLlistaConsoles.filter(function (obj) { return obj.name == receivedPOST.name })
+      await wait(1000)
       if (objLlistaFiltrada.length > 0) {
         result = { result: objLlistaFiltrada[0] }
       }
     }
     if (receivedPOST.type == "marques") {
       var objLlistaMarques = objLlistaConsoles.map(function (obj) { return obj.brand })
+      await wait(1000)
       let senseDuplicats = [...new Set(objLlistaMarques)]
       result = { result: senseDuplicats } 
     }
@@ -43,4 +45,9 @@ async function getDades (req, res) {
 
   res.writeHead(200, { 'Content-Type': 'application/json' })
   res.end(JSON.stringify(result))
+}
+
+// Força un temps d'espera
+function wait (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
 }

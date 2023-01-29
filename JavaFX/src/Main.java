@@ -1,4 +1,7 @@
+import org.json.JSONObject;
+
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -6,9 +9,18 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public static UtilsWS socketClient;
+
     public static int port = 3000;
     public static String protocol = "http";
     public static String host = "localhost";
+    public static String protocolWS = "ws";
+
+    // Exemple de configuració per Railway
+    // public static int port = 443;
+    // public static String protocol = "https";
+    // public static String host = "server-production-46ef.up.railway.app";
+    // public static String protocolWS = "wss";
 
     // Camps JavaFX a modificar
     public static Label consoleName = new Label();
@@ -17,6 +29,18 @@ public class Main extends Application {
     public static ImageView imageView = new ImageView(); 
 
     public static void main(String[] args) {
+
+        // Iniciar WebSockets
+        socketClient = UtilsWS.getSharedInstance(protocolWS + "://" + host + ":" + port);
+        socketClient.onMessage((response) -> {
+            // JavaFX necessita que els canvis es facin des de el thread principal
+            Platform.runLater(()->{ 
+                // Fer aquí els canvis a la interficie
+                JSONObject msgObj = new JSONObject(response);
+                Controller1 ctrl = (Controller1) UtilsViews.controllers.get(1);
+                ctrl.receiveMessage(msgObj);
+            });
+        });
 
         // Iniciar app JavaFX   
         launch(args);
@@ -48,6 +72,7 @@ public class Main extends Application {
 
     @Override
     public void stop() { 
+        socketClient.close();
         System.exit(1); // Kill all executor services
     }
 }

@@ -68,13 +68,8 @@ public class Controller0 implements Initializable {
     }
 
     @FXML
-    private void setViewPost() {
-        UtilsViews.setViewAnimating("view0.fxml");
-    }
-
-    @FXML
     private void setViewWS() {
-        UtilsViews.setViewAnimating("view1.fxml");
+        UtilsViews.setViewAnimating("View1");
     }
 
     private void showLoading () {
@@ -98,10 +93,10 @@ public class Controller0 implements Initializable {
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
             JSONObject objResponse = new JSONObject(response);
             if (objResponse.getString("status").equals("OK")) {
-                JSONArray brandsObj = objResponse.getJSONArray("result");
+                JSONArray JSONlist = objResponse.getJSONArray("result");
                 ArrayList<String> brandsArr = new ArrayList<>();
-                for (int i = 0; i < brandsObj.length(); i++) {
-                    brandsArr.add(brandsObj.getString(i));
+                for (int i = 0; i < JSONlist.length(); i++) {
+                    brandsArr.add(JSONlist.getString(i));
                 }
                 choiceBox.getItems().clear();
                 choiceBox.getItems().addAll(brandsArr);

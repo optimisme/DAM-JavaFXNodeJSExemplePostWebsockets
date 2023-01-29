@@ -112,6 +112,6 @@ public class UtilsHTTP {
             callBack.accept("{ \"status\": \"KO\", \"result\": \"Error failed POST task\" }");
             executorService.shutdownNow();
         });
-        executorService.execute(task);       
+        executorService.execute(task); 
 	}
 }

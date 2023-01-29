@@ -14,15 +14,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 public class Controller0 implements Initializable {
 
     @FXML
-    private Label txtName, txtDate, txtBrand;
+    private Label txtName, txtDate, txtBrand, txtSelected, txtError;
 
     @FXML
     private ImageView imgConsole;
@@ -31,7 +31,7 @@ public class Controller0 implements Initializable {
     private ChoiceBox<String> choiceBox;
 
     @FXML
-    private Path loading;
+    private ProgressIndicator loading;
     private int loadingCounter = 0;
 
     @Override
@@ -40,6 +40,7 @@ public class Controller0 implements Initializable {
         // Start choiceBox
         choiceBox.setOnAction((event) -> {
             System.out.println("Selected brand: " + choiceBox.getValue());
+            txtSelected.setText(choiceBox.getValue());
         });
 
         // Start loading animation
@@ -64,6 +65,16 @@ public class Controller0 implements Initializable {
     @FXML
     public void loadPlaystation3() {
         loadConsoleInfo("Playstation 3");
+    }
+
+    @FXML
+    private void setViewPost() {
+        UtilsViews.setViewAnimating("view0.fxml");
+    }
+
+    @FXML
+    private void setViewWS() {
+        UtilsViews.setViewAnimating("view1.fxml");
     }
 
     private void showLoading () {
@@ -95,6 +106,8 @@ public class Controller0 implements Initializable {
                 choiceBox.getItems().clear();
                 choiceBox.getItems().addAll(brandsArr);
                 choiceBox.setValue(brandsArr.get(0));
+            } else {
+                showError();
             }
             hideLoading();
         });
@@ -128,6 +141,18 @@ public class Controller0 implements Initializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            showError();
         }
+    }
+
+    private void showError () {
+        
+        // Show the error
+        txtError.setVisible(true);
+
+        // Hide the error after 3 seconds
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), ae -> txtError.setVisible(false)));
+        timeline.play();
     }
 }

@@ -73,10 +73,5 @@
             <ProgressIndicator fx:id="loading" scaleX="0.5" scaleY="0.5" visible="false" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="20.0" layoutY="460.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="450.0">
-         <children>
-            <Label fx:id="txtError" text="ERROR" textFill="RED" visible="false" />
-         </children>
-      </HBox>
    </children>
 </AnchorPane>

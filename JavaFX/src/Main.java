@@ -31,12 +31,13 @@ public class Main extends Application {
         UtilsViews.stage = stage;
         UtilsViews.parentContainer.setStyle("-fx-font: 14 arial;");
         UtilsViews.addView(getClass(), "View0", "./assets/view0.fxml");
+        UtilsViews.addView(getClass(), "View1", "./assets/view1.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
         
         stage.setScene(scene);
         stage.onCloseRequestProperty(); // Call close method when closing window
-        stage.setTitle("Exemples Canvas");
+        stage.setTitle("JavaFX - NodeJS");
         stage.setMinWidth(windowWidth);
         stage.setMinHeight(windowHeight);
         stage.show();

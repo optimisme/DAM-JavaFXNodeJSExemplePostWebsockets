@@ -9,6 +9,7 @@ import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,12 +26,21 @@ public class Controller0 implements Initializable {
     private ImageView imgConsole;
 
     @FXML
+    private ChoiceBox<String> choiceBox;
+
+    @FXML
     private Path loading;
     private int loadingCounter = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        // Start choiceBox
+        choiceBox.setOnAction((event) -> {
+            System.out.println("Selected brand" + choiceBox.getValue());
+        });
+
+        // Start loading animation
         KeyValue kvRight = new KeyValue(loading.rotateProperty(), 360, Interpolator.LINEAR);
         KeyFrame kfRight = new KeyFrame(Duration.seconds(1), kvRight);
         Timeline timelineRight = new Timeline();
@@ -72,7 +82,10 @@ public class Controller0 implements Initializable {
         showLoading();
         MsgPostLlista msg = new MsgPostLlista("marques");
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", UtilsJSON.stringify(msg), (response) -> {
-            System.out.println(response);
+            MsgResStringArr brands = (MsgResStringArr) UtilsJSON.parse(response, MsgResStringArr.class);
+            choiceBox.getItems().clear();
+            choiceBox.getItems().addAll(brands.result);
+            choiceBox.setValue(brands.result.get(0));
             hideLoading();
         });
     }

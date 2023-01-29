@@ -32,14 +32,14 @@ async function getDades (req, res) {
       var objLlistaFiltrada = objLlistaConsoles.filter(function (obj) { return obj.name == receivedPOST.name })
       await wait(1000)
       if (objLlistaFiltrada.length > 0) {
-        result = { result: objLlistaFiltrada[0] }
+        result = { status: "OK", result: objLlistaFiltrada[0] }
       }
     }
     if (receivedPOST.type == "marques") {
       var objLlistaMarques = objLlistaConsoles.map(function (obj) { return obj.brand })
       await wait(1000)
       let senseDuplicats = [...new Set(objLlistaMarques)]
-      result = { result: senseDuplicats } 
+      result = { status: "OK", result: senseDuplicats } 
     }
   }
 

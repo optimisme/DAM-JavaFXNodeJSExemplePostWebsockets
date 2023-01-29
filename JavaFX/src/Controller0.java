@@ -89,7 +89,7 @@ public class Controller0 implements Initializable {
         obj.put("type", "marques");
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
             JSONObject objResponse = new JSONObject(response);
-            if (!objResponse.getString("type").equals("error")) {
+            if (objResponse.getString("status").equals("OK")) {
                 JSONArray brandsObj = objResponse.getJSONArray("result");
                 ArrayList<String> brandsArr = new ArrayList<>();
                 for (int i = 0; i < brandsObj.length(); i++) {
@@ -116,7 +116,7 @@ public class Controller0 implements Initializable {
 
     private void setConsoleInfo (String response) {
         JSONObject objResponse = new JSONObject(response);
-        if (!objResponse.getString("type").equals("error")) {
+        if (objResponse.getString("status").equals("OK")) {
             JSONObject console = objResponse.getJSONObject("result");
 
             txtName.setText(console.getString("name"));

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -8,12 +9,15 @@ import org.json.JSONObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 public class Controller0 implements Initializable {
@@ -31,13 +35,17 @@ public class Controller0 implements Initializable {
     private ProgressIndicator loading;
     private int loadingCounter = 0;
 
+    @FXML
+    private VBox yPane = new VBox();
+
+    private ArrayList<String> brandsArr = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         // Start choiceBox
         choiceBox.setOnAction((event) -> {
-            System.out.println("Selected brand: " + choiceBox.getValue());
-            txtSelected.setText(choiceBox.getValue());
+            loadBrandList(choiceBox.getSelectionModel().getSelectedItem());
         });
     }
 
@@ -83,13 +91,16 @@ public class Controller0 implements Initializable {
             JSONObject objResponse = new JSONObject(response);
             if (objResponse.getString("status").equals("OK")) {
                 JSONArray JSONlist = objResponse.getJSONArray("result");
-                ArrayList<String> brandsArr = new ArrayList<>();
+                brandsArr.clear();
                 for (int i = 0; i < JSONlist.length(); i++) {
                     brandsArr.add(JSONlist.getString(i));
                 }
+
                 choiceBox.getItems().clear();
                 choiceBox.getItems().addAll(brandsArr);
                 choiceBox.setValue(brandsArr.get(0));
+
+                loadBrandList(brandsArr.get(0));
             } else {
                 showError();
             }
@@ -128,6 +139,50 @@ public class Controller0 implements Initializable {
         } else {
             showError();
         }
+    }
+
+    @FXML
+    private void loadBrandList (String brand) {
+
+        // Set selected brand in label
+        txtSelected.setText(choiceBox.getValue());
+        yPane.getChildren().clear();
+
+        // Load list of consoles for this brand
+        showLoading();
+        JSONObject obj = new JSONObject("{}");
+        obj.put("type", "marca");
+        obj.put("name", brand);
+
+        // Ask for data
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
+            JSONObject objResponse = new JSONObject(response);
+            if (objResponse.getString("status").equals("OK")) {
+                JSONArray JSONlist = objResponse.getJSONArray("result");
+                URL resource = this.getClass().getResource("./assets/listItem.fxml");
+
+                for (int i = 0; i < JSONlist.length(); i++) {
+                    JSONObject console = JSONlist.getJSONObject(i);
+                    FXMLLoader loader = new FXMLLoader(resource);
+                    try {
+                        Parent itemTemplate = loader.load();
+                        ControllerItem itemController = loader.getController();
+                    
+                        itemController.setTitle(console.getString("name"));
+                        itemController.setSubtitle(console.getString("processor"));
+                        itemController.setColor("white");
+            
+                        yPane.getChildren().add(itemTemplate);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            } else {
+                showError();
+            }
+            hideLoading();
+        });
     }
 
     private void showError () {

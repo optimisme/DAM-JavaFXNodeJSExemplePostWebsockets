@@ -5,27 +5,42 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchor" minHeight="500.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller0">
    <children>
+      <HBox alignment="CENTER" layoutX="20.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <ProgressIndicator fx:id="loading" scaleX="0.5" scaleY="0.5" visible="false" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="20.0" layoutY="460.0" prefWidth="100.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <Label fx:id="txtError" text="ERROR" textFill="RED" />
+         </children>
+      </HBox>
       <Label alignment="CENTER" prefHeight="17.0" prefWidth="600.0" text="Crides POST" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <GridPane prefHeight="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+      <Button fx:id="button01" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#setViewWS" prefHeight="25.0" style="-fx-background-color: white;" text="WebSockets &gt;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <GridPane prefHeight="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="75.0">
         <columnConstraints>
           <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
         </columnConstraints>
         <rowConstraints>
@@ -34,62 +49,43 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Carregar dades de: " GridPane.halignment="LEFT">
+            <Label text="Carregar dades de: " GridPane.halignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#loadGameCube" text="GameCube" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" onAction="#loadXbox" text="Xbox One" GridPane.columnIndex="2" />
-            <Button mnemonicParsing="false" onAction="#loadPlaystation3" text="Playstation 3" GridPane.columnIndex="3" />
-            <Button mnemonicParsing="false" onAction="#listBrands" text="Llista de marques" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin></Button>
-            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin></ChoiceBox>
-            <Label fx:id="txtSelected" text="Selected" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin></Label>
+            <Button mnemonicParsing="false" onAction="#loadGameCube" text="GameCube" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#loadXbox" text="Xbox One" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#loadPlaystation3" text="Playstation 3" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label fx:id="txtName" alignment="CENTER" text="Nom de la videoconsola" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="200.0">
+      <Label fx:id="txtName" alignment="CENTER" text="Nom de la videoconsola" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="200.0">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="txtDate" alignment="CENTER" layoutX="10.0" text="0000-00-00" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="235.0">
+      <Label fx:id="txtDate" alignment="CENTER" layoutX="10.0" text="0000-00-00" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="235.0">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <Label fx:id="txtBrand" alignment="CENTER" layoutX="10.0" text="Marca" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="275.0">
+      <Label fx:id="txtBrand" alignment="CENTER" layoutX="10.0" text="Marca" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="275.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutX="10.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="300.0">
+      <HBox alignment="CENTER" layoutX="10.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="300.0">
          <children>
             <ImageView fx:id="imgConsole" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="450.0">
-         <children>
-            <ProgressIndicator fx:id="loading" scaleX="0.5" scaleY="0.5" visible="false" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="20.0" layoutY="460.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="450.0">
-         <children>
-            <Label fx:id="txtError" text="ERROR" textFill="RED" visible="false" />
-         </children>
-      </HBox>
-      <Button fx:id="button01" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#setViewWS" prefHeight="25.0" style="-fx-background-color: white;" text="WebSockets &gt;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
+      <Button layoutX="498.0" layoutY="107.0" mnemonicParsing="false" onAction="#listBrands" text="Llista de marques" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="105.0" />
+      <ChoiceBox fx:id="choiceBox" layoutX="543.0" layoutY="141.0" prefHeight="25.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="150.0" />
+      <Label fx:id="txtSelected" layoutX="549.0" layoutY="183.0" text="Marca" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="200.0" />
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="520.0" layoutY="116.0" prefHeight="200.0" prefWidth="225.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="250.0">
+         <content>
+            <VBox fx:id="yPane" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

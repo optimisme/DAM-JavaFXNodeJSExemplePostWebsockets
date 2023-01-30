@@ -35,17 +35,28 @@ async function getDades (req, res) {
 
   if (receivedPOST) {
     if (receivedPOST.type == "consola") {
-      var objFilteredList = objConsolesList.filter(function (obj) { return obj.name == receivedPOST.name })
+      var objFilteredList = objConsolesList.filter((obj) => { return obj.name == receivedPOST.name })
       await wait(1500)
       if (objFilteredList.length > 0) {
         result = { status: "OK", result: objFilteredList[0] }
       }
     }
     if (receivedPOST.type == "marques") {
-      var objBrandsList = objConsolesList.map(function (obj) { return obj.brand })
+      var objBrandsList = objConsolesList.map((obj) => { return obj.brand })
       await wait(1500)
       let senseDuplicats = [...new Set(objBrandsList)]
       result = { status: "OK", result: senseDuplicats.sort() } 
+    }
+    if (receivedPOST.type == "marca") {
+      var objBrandConsolesList = objConsolesList.filter ((obj) => { return obj.brand == receivedPOST.name })
+      await wait(1500)
+      // Ordena les consoles per nom de model
+      objBrandConsolesList.sort((a,b) => { 
+          var textA = a.name.toUpperCase();
+          var textB = b.name.toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      })
+      result = { status: "OK", result: objBrandConsolesList } 
     }
   }
 

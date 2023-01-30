@@ -108,7 +108,7 @@ public class Controller0 implements Initializable {
         });
     }
 
-    private void loadConsoleInfo (String consoleName) {
+    public void loadConsoleInfo (String consoleName) {
         showLoading();
         JSONObject obj = new JSONObject("{}");
         obj.put("type", "consola");
@@ -161,6 +161,7 @@ public class Controller0 implements Initializable {
                 JSONArray JSONlist = objResponse.getJSONArray("result");
                 URL resource = this.getClass().getResource("./assets/listItem.fxml");
 
+                yPane.getChildren().clear();
                 for (int i = 0; i < JSONlist.length(); i++) {
                     JSONObject console = JSONlist.getJSONObject(i);
                     FXMLLoader loader = new FXMLLoader(resource);
@@ -171,7 +172,7 @@ public class Controller0 implements Initializable {
                         itemController.setTitle(console.getString("name"));
                         itemController.setSubtitle(console.getString("processor"));
                         itemController.setColor("white");
-            
+                        
                         yPane.getChildren().add(itemTemplate);
                     } catch (IOException e) {
                         e.printStackTrace();

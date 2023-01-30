@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -8,10 +7,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -37,55 +33,33 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <GridPane prefHeight="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="75.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="Carregar dades de: " GridPane.halignment="CENTER">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Button mnemonicParsing="false" onAction="#loadGameCube" text="GameCube" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#loadXbox" text="Xbox One" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#loadPlaystation3" text="Playstation 3" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-      <Label fx:id="txtName" alignment="CENTER" text="Nom de la videoconsola" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="200.0">
-         <font>
-            <Font name="System Bold" size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="txtDate" alignment="CENTER" layoutX="10.0" text="0000-00-00" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="235.0">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <Label fx:id="txtBrand" alignment="CENTER" layoutX="10.0" text="Marca" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="275.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <HBox alignment="CENTER" layoutX="10.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="300.0">
-         <children>
-            <ImageView fx:id="imgConsole" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-      <Button layoutX="498.0" layoutY="107.0" mnemonicParsing="false" onAction="#listBrands" text="Llista de marques" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="105.0" />
-      <ChoiceBox fx:id="choiceBox" layoutX="543.0" layoutY="141.0" prefHeight="25.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="150.0" />
-      <Label fx:id="txtSelected" layoutX="549.0" layoutY="183.0" text="Marca" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="200.0" />
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="520.0" layoutY="116.0" prefHeight="200.0" prefWidth="225.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="250.0">
+      <Button layoutX="498.0" layoutY="107.0" mnemonicParsing="false" onAction="#listBrands" text="Llista de marques" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="105.0" />
+      <ChoiceBox fx:id="choiceBox" layoutX="543.0" layoutY="141.0" prefHeight="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="150.0" />
+      <Label fx:id="txtSelected" layoutX="549.0" layoutY="183.0" text="Marca" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="190.0" />
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="520.0" layoutY="116.0" prefHeight="225.0" prefWidth="225.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="225.0">
          <content>
             <VBox fx:id="yPane" />
          </content>
       </ScrollPane>
+      <Label fx:id="txtName" alignment="CENTER" text="Nom de la videoconsola" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="125.0">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtDate" alignment="CENTER" layoutX="10.0" text="0000-00-00" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="165.0">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtBrand" alignment="CENTER" layoutX="10.0" text="Marca Consola" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="225.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="10.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="300.0">
+         <children>
+            <ImageView fx:id="imgConsole" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

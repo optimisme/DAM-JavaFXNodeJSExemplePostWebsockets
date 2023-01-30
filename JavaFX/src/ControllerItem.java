@@ -10,6 +10,12 @@ public class ControllerItem {
     @FXML
     private Rectangle coloredShape;
 
+    @FXML
+    private void handleMenuAction() {
+        Controller0 c0 = (Controller0) UtilsViews.getController("View0");
+        c0.loadConsoleInfo(title.getText());
+    }
+
     public void setTitle(String title) {
         this.title.setText(title);
     }

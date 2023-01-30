@@ -20,7 +20,6 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false" onAction="#setViewWS" text="WebSockets &gt;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="25.0" />
       <GridPane prefHeight="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
         <columnConstraints>
           <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" />
@@ -35,7 +34,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Carregar dades de: ">
+            <Label text="Carregar dades de: " GridPane.halignment="LEFT">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -43,9 +42,18 @@
             <Button mnemonicParsing="false" onAction="#loadGameCube" text="GameCube" GridPane.columnIndex="1" />
             <Button mnemonicParsing="false" onAction="#loadXbox" text="Xbox One" GridPane.columnIndex="2" />
             <Button mnemonicParsing="false" onAction="#loadPlaystation3" text="Playstation 3" GridPane.columnIndex="3" />
-            <Button mnemonicParsing="false" onAction="#listBrands" text="Llista de marques" GridPane.columnIndex="4" />
-            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Label fx:id="txtSelected" text="Selected" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#listBrands" text="Llista de marques" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></Button>
+            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></ChoiceBox>
+            <Label fx:id="txtSelected" text="Selected" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></Label>
          </children>
       </GridPane>
       <Label fx:id="txtName" alignment="CENTER" text="Nom de la videoconsola" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="200.0">
@@ -78,5 +86,10 @@
             <Label fx:id="txtError" text="ERROR" textFill="RED" visible="false" />
          </children>
       </HBox>
+      <Button fx:id="button01" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#setViewWS" prefHeight="25.0" style="-fx-background-color: white;" text="WebSockets &gt;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

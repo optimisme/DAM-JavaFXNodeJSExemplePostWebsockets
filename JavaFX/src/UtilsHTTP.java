@@ -47,10 +47,6 @@ public class UtilsHTTP {
             callBack.accept(task.getValue());
             executorService.shutdownNow();
         });
-        task.setOnCancelled(event -> {
-            callBack.accept("{ \"status\": \"KO\", \"result\": \"Error cancelled GET task\" }");
-            executorService.shutdownNow();
-        });
         task.setOnFailed(event -> {
             callBack.accept("{ \"status\": \"KO\", \"result\": \"Error failed GET task\" }");
             executorService.shutdownNow();
@@ -102,10 +98,6 @@ public class UtilsHTTP {
         };
         task.setOnSucceeded(event -> {
             callBack.accept(task.getValue());
-            executorService.shutdownNow();
-        });
-        task.setOnCancelled(event -> {
-            callBack.accept("{ \"status\": \"KO\", \"result\": \"Error cancelled POST task\" }");
             executorService.shutdownNow();
         });
         task.setOnFailed(event -> {

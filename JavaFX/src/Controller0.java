@@ -42,14 +42,6 @@ public class Controller0 implements Initializable {
             System.out.println("Selected brand: " + choiceBox.getValue());
             txtSelected.setText(choiceBox.getValue());
         });
-
-        // Start loading animation
-        KeyValue kvRight = new KeyValue(loading.rotateProperty(), 360, Interpolator.LINEAR);
-        KeyFrame kfRight = new KeyFrame(Duration.seconds(1), kvRight);
-        Timeline timelineRight = new Timeline();
-        timelineRight.setCycleCount(Animation.INDEFINITE);
-        timelineRight.getKeyFrames().add(kfRight);
-        timelineRight.play();
     }
 
     @FXML

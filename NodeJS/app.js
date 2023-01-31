@@ -110,7 +110,7 @@ wss.on('connection', (ws) => {
   })
 })
 
-// Get clients ids
+// Send clientsIds to everyone
 function sendClients () {
   var clients = []
   socketsClients.forEach((value, key) => {

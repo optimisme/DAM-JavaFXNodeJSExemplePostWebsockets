@@ -161,7 +161,7 @@ public class Controller0 implements Initializable {
                     // Fill template with console information
                     itemController.setTitle(console.getString("name"));
                     itemController.setSubtitle(console.getString("processor"));
-                    itemController.setColor("white");
+                    itemController.setColor(console.getString("color"));
                     
                     // Add template to the list
                     yPane.getChildren().add(itemTemplate);

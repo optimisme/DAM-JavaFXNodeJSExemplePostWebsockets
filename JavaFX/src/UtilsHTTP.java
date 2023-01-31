@@ -62,10 +62,12 @@ public class UtilsHTTP {
                 return "{ \"status\": \"KO\", \"result\": \"Error on " + type + " request\" }";
             }
         };
+
         task.setOnSucceeded(event -> {
             callBack.accept(task.getValue());
             executorService.shutdownNow();
         });
+        
         executorService.execute(task); 
 	}
 }

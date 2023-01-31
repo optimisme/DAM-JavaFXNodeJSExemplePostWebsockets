@@ -145,3 +145,24 @@ async function private (obj) {
     }
   })
 }
+
+// Perform a query to the database
+function queryDatabase (query) {
+
+  return new Promise((resolve, reject) => {
+    var connection = mysql.createConnection({
+      host: process.env.MYSQLHOST || "localhost",
+      port: process.env.MYSQLPORT || 3306,
+      user: process.env.MYSQLUSER || "root",
+      password: process.env.MYSQLPASSWORD || "",
+      database: process.env.MYSQLDATABASE || "test"
+    });
+
+    connection.query(query, (error, results) => { 
+      if (error) reject(error);
+      resolve(results)
+    });
+     
+    connection.end();
+  })
+}

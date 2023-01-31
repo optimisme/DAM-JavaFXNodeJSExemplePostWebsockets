@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "latest",
     "forever": "^4.0.3",
+    "mysql2": "^3.0.1",
     "nodemon": "latest",
     "uuid": "^9.0.0",
     "ws": "^8.12.0"

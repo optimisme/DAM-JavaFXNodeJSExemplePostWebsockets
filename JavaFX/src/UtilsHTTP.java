@@ -11,63 +11,32 @@ import javafx.concurrent.Task;
 
 public class UtilsHTTP {
 
-    public static void sendGET(String GET_URL, Consumer<String> callBack) {
-        ExecutorService executorService = Executors.newFixedThreadPool(1);
-        Task<String> task = new Task<>() {
-            @Override 
-            protected String call() {
-                try {
-                    URL obj = new URL(GET_URL);
-                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                    con.setRequestMethod("GET");
-                    con.setRequestProperty("User-Agent", "Mozilla/5.0");
-                    int responseCode = con.getResponseCode();
-    
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                        String inputLine;
-                        StringBuffer response = new StringBuffer();
-    
-                        while ((inputLine = in.readLine()) != null) {
-                            response.append(inputLine);
-                        }
-                        in.close();
-    
-                        return response.toString();
-                    } else {
-                        System.out.println("GET request did not work.");
-                    }
-                } catch (Exception e) {
-                    System.out.println("GET request error.");
-                }
-                return "{ \"status\": \"KO\", \"result\": \"Error on GET request\" }";
-            }
-        };
-        task.setOnSucceeded(event -> {
-            callBack.accept(task.getValue());
-            executorService.shutdownNow();
-        });
-        executorService.execute(task);  
+    public static void sendGET(String get_url, Consumer<String> callBack) {
+        send("GET", get_url, "", callBack);
 	}
 
-    public static void sendPOST(String POST_URL, String POST_PARAMS, Consumer<String> callBack) {
+    public static void sendPOST(String post_url, String post_params, Consumer<String> callBack) {
+        send("POST", post_url, post_params, callBack);
+	}
+
+    private static void send(String type, String post_url, String post_params, Consumer<String> callBack) {
         ExecutorService executorService = Executors.newFixedThreadPool(1);
         Task<String> task = new Task<>() {
             @Override 
             protected String call() {
                 try {
-                    URL obj = new URL(POST_URL);
+                    URL obj = new URL(post_url);
                     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                    con.setRequestMethod("POST");
+                    con.setRequestMethod(type);
                     con.setRequestProperty("User-Agent", "Mozilla/5.0");
             
-                    // For POST only - START
-                    con.setDoOutput(true);
-                    OutputStream os = con.getOutputStream();
-                    os.write(POST_PARAMS.getBytes());
-                    os.flush();
-                    os.close();
-                    // For POST only - END
+                    if (type.equals("POST")) {
+                        con.setDoOutput(true);
+                        OutputStream os = con.getOutputStream();
+                        os.write(post_params.getBytes());
+                        os.flush();
+                        os.close();
+                    }
             
                     int responseCode = con.getResponseCode();
             
@@ -83,12 +52,12 @@ public class UtilsHTTP {
 
                         return response.toString();
                     } else {
-                        System.out.println("POST request did not work.");
+                        System.out.println(type + " request did not work.");
                     }
                 } catch (Exception e) {
-                    System.out.println("POST request error.");
+                    System.out.println(type + " request error.");
                 }
-                return "{ \"status\": \"KO\", \"result\": \"Error on POST request\" }";
+                return "{ \"status\": \"KO\", \"result\": \"Error on " + type + " request\" }";
             }
         };
         task.setOnSucceeded(event -> {

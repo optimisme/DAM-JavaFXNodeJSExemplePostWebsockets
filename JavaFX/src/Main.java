@@ -33,6 +33,7 @@ public class Main extends Application {
         // Iniciar WebSockets
         socketClient = UtilsWS.getSharedInstance(protocolWS + "://" + host + ":" + port);
         socketClient.onMessage((response) -> {
+            
             // JavaFX necessita que els canvis es facin des de el thread principal
             Platform.runLater(()->{ 
                 // Fer aquí els canvis a la interficie

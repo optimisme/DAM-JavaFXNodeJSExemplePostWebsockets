@@ -49,7 +49,7 @@ public class Controller1 implements Initializable {
     }
 
     @FXML
-    private void setViewPOST() {
+    private void setView0() {
         UtilsViews.setViewAnimating("View0");
     }
 
@@ -72,6 +72,7 @@ public class Controller1 implements Initializable {
         System.out.println("Send WebSocket: " + obj.toString());
     }
 
+    // Main socketClient calls this method when receiving a message
     public void receiveMessage (JSONObject messageObj) {
         System.out.println("Receive WebSocket: " + messageObj.toString());
         String type = messageObj.getString("type");

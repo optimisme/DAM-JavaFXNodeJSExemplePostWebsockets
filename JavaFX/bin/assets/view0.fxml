@@ -28,12 +28,12 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button fx:id="button01" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#setViewWS" prefHeight="25.0" style="-fx-background-color: white;" text="WebSockets &gt;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+      <Button fx:id="button01" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#setView1" prefHeight="25.0" style="-fx-background-color: white;" text="WebSockets &gt;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="498.0" layoutY="107.0" mnemonicParsing="false" onAction="#listBrands" text="Llista de marques" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="105.0" />
+      <Button layoutX="498.0" layoutY="107.0" mnemonicParsing="false" onAction="#loadBrandsList" text="Carregar la llista de marques" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="105.0" />
       <ChoiceBox fx:id="choiceBox" layoutX="543.0" layoutY="141.0" prefHeight="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="150.0" />
       <Label fx:id="txtSelected" layoutX="549.0" layoutY="183.0" text="Marca" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="190.0" />
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="520.0" layoutY="116.0" prefHeight="225.0" prefWidth="225.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="225.0">

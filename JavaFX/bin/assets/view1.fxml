@@ -66,7 +66,7 @@
          </children>
       </GridPane>
       <TextArea fx:id="txtArea" editable="false" layoutX="86.0" layoutY="176.0" prefHeight="200.0" prefWidth="200.0" promptText="textArea" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="175.0" />
-      <Button fx:id="button01" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#setViewPOST" prefHeight="25.0" style="-fx-background-color: white;" text="&lt; Crides Post" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
+      <Button fx:id="button01" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#setView0" prefHeight="25.0" style="-fx-background-color: white;" text="&lt; Crides Post" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="18.0" />
          </font>

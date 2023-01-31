@@ -48,7 +48,7 @@ public class Controller0 implements Initializable {
     }
 
     @FXML
-    private void setViewWS() {
+    private void setView1() {
         UtilsViews.setViewAnimating("View1");
     }
 
@@ -75,18 +75,18 @@ public class Controller0 implements Initializable {
     }
 
     @FXML
-    public void listBrands() {
+    public void loadBrandsList() {
         JSONObject obj = new JSONObject("{}");
         obj.put("type", "marques");
 
         showLoading();
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            listBrandsCallback(response);
+            loadBrandsListCallback(response);
             hideLoading();
         });
     }
 
-    private void listBrandsCallback (String response) {
+    private void loadBrandsListCallback (String response) {
 
         JSONObject objResponse = new JSONObject(response);
 

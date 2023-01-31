@@ -11,21 +11,21 @@ import javafx.concurrent.Task;
 
 public class UtilsHTTP {
 
-    public static void sendGET(String get_url, Consumer<String> callBack) {
-        send("GET", get_url, "", callBack);
+    public static void sendGET(String url, Consumer<String> callBack) {
+        send("GET", url, "", callBack);
 	}
 
-    public static void sendPOST(String post_url, String post_params, Consumer<String> callBack) {
-        send("POST", post_url, post_params, callBack);
+    public static void sendPOST(String url, String post_params, Consumer<String> callBack) {
+        send("POST", url, post_params, callBack);
 	}
 
-    private static void send(String type, String post_url, String post_params, Consumer<String> callBack) {
+    private static void send(String type, String url, String post_params, Consumer<String> callBack) {
         ExecutorService executorService = Executors.newFixedThreadPool(1);
         Task<String> task = new Task<>() {
             @Override 
             protected String call() {
                 try {
-                    URL obj = new URL(post_url);
+                    URL obj = new URL(url);
                     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
                     con.setRequestMethod(type);
                     con.setRequestProperty("User-Agent", "Mozilla/5.0");

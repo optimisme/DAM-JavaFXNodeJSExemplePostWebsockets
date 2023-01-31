@@ -20,6 +20,8 @@ public class UtilsHTTP {
 	}
 
     private static void send(String type, String url, String post_params, Consumer<String> callBack) {
+
+        // Create a new thread to send the request
         ExecutorService executorService = Executors.newFixedThreadPool(1);
         Task<String> task = new Task<>() {
             @Override 

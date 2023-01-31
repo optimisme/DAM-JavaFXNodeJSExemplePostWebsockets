@@ -5,7 +5,7 @@
         "processor": "8-Core AMD Zen 2",
         "speed": 3.8,
         "brand": "Microsoft",
-        "color": "negre",
+        "color": "black",
         "sold": 0,
         "image": "./consoles/microsoft-sx.png"
     },
@@ -15,7 +15,7 @@
         "processor": "8-Core AMD Zen 2",
         "speed": 3.5,
         "brand": "Sony",
-        "color": "blanc",
+        "color": "white",
         "sold": 0,
         "image": "./consoles/sony-ps5.png"
     },
@@ -25,7 +25,7 @@
         "processor": "4xARM Cortex-A57",
         "speed": 1.02,
         "brand": "Nintendo",
-        "color": "negre",
+        "color": "black",
         "sold": 70000000,
         "image": "./consoles/nintendo-switch.png"
     },
@@ -35,7 +35,7 @@
         "processor": "Custom 8-core AMD",
         "speed": 1.75,
         "brand": "Microsoft",
-        "color": "negre",
+        "color": "black",
         "sold": 50000000,
         "image": "./consoles/microsoft-xboxone.png"
     },
@@ -45,7 +45,7 @@
         "processor": "Semi-custom 8-core AMD",
         "speed": 1.6,
         "brand": "Sony",
-        "color": "negre",
+        "color": "black",
         "sold": 112000000,
         "image": "./consoles/sony-ps4.png"
     },
@@ -55,7 +55,7 @@
         "processor": "IBM PowerPC 750",
         "speed": 1.24,
         "brand": "Nintendo",
-        "color": "negre",
+        "color": "black",
         "sold": 14000000,
         "image": "./consoles/nintendo-wiiu.png"
     },
@@ -65,7 +65,7 @@
         "processor": "IBM PowerPC 750",
         "speed": 0.72,
         "brand": "Nintendo",
-        "color": "blanc",
+        "color": "white",
         "sold": 101000000,
         "image": "./consoles/nintendo-wii.png"
     },
@@ -75,7 +75,7 @@
         "processor": "IBM PowerPC Cell",
         "speed": 3.2,
         "brand": "Sony",
-        "color": "negre",
+        "color": "black",
         "sold": 87000000,
         "image": "./consoles/sony-ps3.png"
     },
@@ -85,7 +85,7 @@
         "processor": "IBM PowerPC Tri-core Xenon",
         "speed": 3.2,
         "brand": "Microsoft",
-        "color": "blanc",
+        "color": "white",
         "sold": 84000000,
         "image": "./consoles/microsoft-360.png"
     },
@@ -95,7 +95,7 @@
         "processor": "Intel Pentium III",
         "speed": 0.733,
         "brand": "Microsoft",
-        "color": "negre",
+        "color": "black",
         "sold": 24000000,
         "image": "./consoles/microsoft-xbox.png"
     },
@@ -105,7 +105,7 @@
         "processor": "IBM PowerPC Gekko",
         "speed": 0.486,
         "brand": "Nintendo",
-        "color": "lila",
+        "color": "purple",
         "sold": 22000000,
         "image": "./consoles/nintendo-gamecube.png"
     },
@@ -115,7 +115,7 @@
         "processor": "Emotion engine",
         "speed": 0.294,
         "brand": "Sony",
-        "color": "negre",
+        "color": "black",
         "sold": 155000000,
         "image": "./consoles/sony-ps2.png"
     },
@@ -125,7 +125,7 @@
         "processor": "Hitachi SH-4",
         "speed": 0.2,
         "brand": "Sega",
-        "color": "blanc",
+        "color": "white",
         "sold": 9000000,
         "image": "./consoles/sega-dreamcast.png"
     },
@@ -135,7 +135,7 @@
         "processor": "NEC VR4300",
         "speed": 0.093,
         "brand": "Nintendo",
-        "color": "negre",
+        "color": "black",
         "sold": 33000000,
         "image": "./consoles/nintendo-64.png"
     },
@@ -145,7 +145,7 @@
         "processor": "PowerPC 630",
         "speed": 0.066,
         "brand": "Apple",
-        "color": "blanc",
+        "color": "white",
         "sold": 42000,
         "image": "./consoles/apple-bandai.png"
     },
@@ -155,7 +155,7 @@
         "processor": "R3000",
         "speed": 0.033,
         "brand": "Sony",
-        "color": "gris",
+        "color": "gray",
         "sold": 102000000,
         "image": "./consoles/sony-playstation.png"
     },
@@ -165,7 +165,7 @@
         "processor": "2x Hitachi SH2",
         "speed": 0.028,
         "brand": "Sega",
-        "color": "negre",
+        "color": "black",
         "sold": 9000000,
         "image": "./consoles/sega-saturn.png"
     },
@@ -175,7 +175,7 @@
         "processor": "Motorola 68EC020",
         "speed": 0.014,
         "brand": "Commodore",
-        "color": "negre",
+        "color": "black",
         "sold": 4000000,
         "image": "./consoles/commodore-amiga.png"
     },
@@ -185,7 +185,7 @@
         "processor": "2x SH-2",
         "speed": 0.023,
         "brand": "Sega",
-        "color": "negre",
+        "color": "black",
         "sold": 650000,
         "image": "./consoles/sega-32x.png"
     },
@@ -195,7 +195,7 @@
         "processor": "Motorola 68000",
         "speed": 0.00358,
         "brand": "Sega",
-        "color": "negre",
+        "color": "black",
         "sold": 30000000,
         "image": "./consoles/sega-md.png"
     },
@@ -205,7 +205,7 @@
         "processor": "Ricoh 5A22",
         "speed": 0.00358,
         "brand": "Nintendo",
-        "color": "gris",
+        "color": "gray",
         "sold": 50000000,
         "image": "./consoles/nintendo-sn.png"
     },
@@ -215,7 +215,7 @@
         "processor": "Ricoh 2A03",
         "speed": 0.00179,
         "brand": "Nintendo",
-        "color": "blanc",
+        "color": "white",
         "sold": 62000000,
         "image": "./consoles/nintendo-nes.png"
     },
@@ -225,7 +225,7 @@
         "processor": "Zilog Z80",
         "speed": 0.004,
         "brand": "Sega",
-        "color": "negre",
+        "color": "black",
         "sold": 12000000,
         "image": "./consoles/sega-ms.png"
     },
@@ -235,7 +235,7 @@
         "processor": "6502C",
         "speed": 0.00179,
         "brand": "Atari",
-        "color": "negre",
+        "color": "black",
         "sold": 4000000,
         "image": "./consoles/atari-7800.png"
     }

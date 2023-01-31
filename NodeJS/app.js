@@ -30,7 +30,7 @@ async function getDades (req, res) {
   let receivedPOST = await post.getPostObject(req)
   let result = {};
 
-  var textFile = await fs.readFile("./public/consoles/llista-dades.json", { encoding: 'utf8'})
+  var textFile = await fs.readFile("./public/consoles/consoles-list.json", { encoding: 'utf8'})
   var objConsolesList = JSON.parse(textFile)
 
   if (receivedPOST) {

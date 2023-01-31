@@ -95,7 +95,7 @@
         "processor": "Intel Pentium III",
         "speed": 0.733,
         "brand": "Microsoft",
-        "color": "black",
+        "color": "green",
         "sold": 24000000,
         "image": "./consoles/microsoft-xbox.png"
     },
@@ -115,7 +115,7 @@
         "processor": "Emotion engine",
         "speed": 0.294,
         "brand": "Sony",
-        "color": "black",
+        "color": "blue",
         "sold": 155000000,
         "image": "./consoles/sony-ps2.png"
     },
@@ -175,7 +175,7 @@
         "processor": "Motorola 68EC020",
         "speed": 0.014,
         "brand": "Commodore",
-        "color": "black",
+        "color": "beige",
         "sold": 4000000,
         "image": "./consoles/commodore-amiga.png"
     },
@@ -225,7 +225,7 @@
         "processor": "Zilog Z80",
         "speed": 0.004,
         "brand": "Sega",
-        "color": "black",
+        "color": "red",
         "sold": 12000000,
         "image": "./consoles/sega-ms.png"
     },

@@ -36,11 +36,6 @@ public class UtilsViews {
         controllers.add(loader.getController());
     }
 
-    // Get root of the scene
-    public static StackPane getRoot() {
-        return parentContainer;
-    }
-
     // Get controller by view id (viewId)
     public static Object getController(String viewId) {
         int index = 0;

@@ -36,7 +36,7 @@ public class Controller0 implements Initializable {
     private int loadingCounter = 0;
 
     @FXML
-    private VBox yPane = new VBox();
+    private VBox vBoxList = new VBox();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -119,7 +119,7 @@ public class Controller0 implements Initializable {
         txtSelected.setText(choiceBox.getValue());
 
         // Clear the list of consoles
-        yPane.getChildren().clear();
+        vBoxList.getChildren().clear();
 
         // Load list of consoles for this brand
         JSONObject obj = new JSONObject("{}");
@@ -144,9 +144,9 @@ public class Controller0 implements Initializable {
             URL resource = this.getClass().getResource("./assets/listItem.fxml");
 
             // Clear the list of consoles
-            yPane.getChildren().clear();
+            vBoxList.getChildren().clear();
 
-            // Add received consoles from the JSON to the list
+            // Add received consoles from the JSON to the yPane (VBox) list
             for (int i = 0; i < JSONlist.length(); i++) {
 
                 // Get console information
@@ -164,7 +164,7 @@ public class Controller0 implements Initializable {
                     itemController.setColor(console.getString("color"));
                     
                     // Add template to the list
-                    yPane.getChildren().add(itemTemplate);
+                    vBoxList.getChildren().add(itemTemplate);
 
                 } catch (IOException e) {
                     e.printStackTrace();

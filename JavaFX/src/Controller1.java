@@ -61,6 +61,7 @@ public class Controller1 implements Initializable {
         String type = choiceType.getValue().toLowerCase();
         obj.put("type", type);
         obj.put("message", txt);
+
         if (type.equals("private")) {
             String destination = choiceUser.getValue();
             if (destination == null) {
@@ -68,6 +69,7 @@ public class Controller1 implements Initializable {
             }
             obj.put("destination", destination);
         }
+
         Main.socketClient.safeSend(obj.toString());
         System.out.println("Send WebSocket: " + obj.toString());
     }
@@ -79,21 +81,25 @@ public class Controller1 implements Initializable {
 
         // Update clients choiceBox list
         if (type.equals("clients")) {
+
             JSONArray JSONlist = messageObj.getJSONArray("list");
             ArrayList<String> list = new ArrayList<>();
             String id = messageObj.getString("id");
+
             for (int i = 0; i < JSONlist.length(); i++) {
                 String value = JSONlist.getString(i);
                 if (!value.endsWith(id)) {
                     list.add(JSONlist.getString(i));
                 }
             }
+
             txtId.setText(id);
             if (list.size() > 0) {
                 choiceUser.getItems().clear();
                 choiceUser.getItems().addAll(list);
                 choiceUser.setValue(list.get(0));
             }
+            
         } else if (type.equals("bounce")) {
             
             txtArea.appendText("\n\nBounce: " + messageObj.getString("message"));

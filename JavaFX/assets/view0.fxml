@@ -28,7 +28,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button fx:id="button01" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#setView1" prefHeight="25.0" style="-fx-background-color: white;" text="WebSockets &gt;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+      <Button fx:id="button01" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#setView1" prefHeight="25.0" style="-fx-background-color: white;" text="WebSockets &gt;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="18.0" />
          </font>

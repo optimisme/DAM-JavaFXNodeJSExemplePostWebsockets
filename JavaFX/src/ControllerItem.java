@@ -1,6 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Polygon;
 
 public class ControllerItem {
     
@@ -8,7 +8,7 @@ public class ControllerItem {
     private Label title, subtitle;
 
     @FXML
-    private Rectangle coloredShape;
+    private Polygon coloredShape;
 
     @FXML
     private void handleMenuAction() {

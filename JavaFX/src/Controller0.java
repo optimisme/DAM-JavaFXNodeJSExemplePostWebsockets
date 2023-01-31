@@ -84,39 +84,52 @@ public class Controller0 implements Initializable {
 
     @FXML
     public void listBrands() {
-        showLoading();
         JSONObject obj = new JSONObject("{}");
         obj.put("type", "marques");
+
+        showLoading();
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            JSONObject objResponse = new JSONObject(response);
-            if (objResponse.getString("status").equals("OK")) {
-                JSONArray JSONlist = objResponse.getJSONArray("result");
-                brandsArr.clear();
-                for (int i = 0; i < JSONlist.length(); i++) {
-                    brandsArr.add(JSONlist.getString(i));
-                }
-
-                choiceBox.getItems().clear();
-                choiceBox.getItems().addAll(brandsArr);
-                choiceBox.setValue(brandsArr.get(0));
-
-                loadBrandList(brandsArr.get(0));
-            } else {
-                showError();
-            }
+            listBrandsCallback(response);
             hideLoading();
         });
     }
 
+    private void listBrandsCallback (String response) {
+
+        JSONObject objResponse = new JSONObject(response);
+
+        if (objResponse.getString("status").equals("OK")) {
+            JSONArray JSONlist = objResponse.getJSONArray("result");
+            brandsArr.clear();
+            for (int i = 0; i < JSONlist.length(); i++) {
+                brandsArr.add(JSONlist.getString(i));
+            }
+
+            choiceBox.getItems().clear();
+            choiceBox.getItems().addAll(brandsArr);
+            choiceBox.setValue(brandsArr.get(0));
+
+            loadBrandList(brandsArr.get(0));
+        } else {
+            showError();
+        }
+    }
+
     public void loadConsoleInfo (String consoleName) {
-        showLoading();
+
         JSONObject obj = new JSONObject("{}");
         obj.put("type", "consola");
         obj.put("name", consoleName);
+
+        showLoading();
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            setConsoleInfo(response);
+            loadConsoleInfoCallback(response);
             hideLoading();
         });
+    }
+
+    private void loadConsoleInfoCallback (String response) {
+        setConsoleInfo(response);
     }
 
     private void setConsoleInfo (String response) {
@@ -149,41 +162,47 @@ public class Controller0 implements Initializable {
         yPane.getChildren().clear();
 
         // Load list of consoles for this brand
-        showLoading();
         JSONObject obj = new JSONObject("{}");
         obj.put("type", "marca");
         obj.put("name", brand);
 
         // Ask for data
+        showLoading();
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            JSONObject objResponse = new JSONObject(response);
-            if (objResponse.getString("status").equals("OK")) {
-                JSONArray JSONlist = objResponse.getJSONArray("result");
-                URL resource = this.getClass().getResource("./assets/listItem.fxml");
-
-                yPane.getChildren().clear();
-                for (int i = 0; i < JSONlist.length(); i++) {
-                    JSONObject console = JSONlist.getJSONObject(i);
-                    FXMLLoader loader = new FXMLLoader(resource);
-                    try {
-                        Parent itemTemplate = loader.load();
-                        ControllerItem itemController = loader.getController();
-                    
-                        itemController.setTitle(console.getString("name"));
-                        itemController.setSubtitle(console.getString("processor"));
-                        itemController.setColor("white");
-                        
-                        yPane.getChildren().add(itemTemplate);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            } else {
-                showError();
-            }
+            loadBrandsListCallback(response);
             hideLoading();
         });
+    }
+
+    private void loadBrandsListCallback (String response) {
+
+        JSONObject objResponse = new JSONObject(response);
+
+        if (objResponse.getString("status").equals("OK")) {
+            JSONArray JSONlist = objResponse.getJSONArray("result");
+            URL resource = this.getClass().getResource("./assets/listItem.fxml");
+
+            yPane.getChildren().clear();
+            for (int i = 0; i < JSONlist.length(); i++) {
+                JSONObject console = JSONlist.getJSONObject(i);
+                FXMLLoader loader = new FXMLLoader(resource);
+                try {
+                    Parent itemTemplate = loader.load();
+                    ControllerItem itemController = loader.getController();
+                
+                    itemController.setTitle(console.getString("name"));
+                    itemController.setSubtitle(console.getString("processor"));
+                    itemController.setColor("white");
+                    
+                    yPane.getChildren().add(itemTemplate);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } else {
+            showError();
+        }
     }
 
     private void showError () {

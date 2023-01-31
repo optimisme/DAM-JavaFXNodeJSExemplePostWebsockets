@@ -117,6 +117,8 @@ public class Controller0 implements Initializable {
 
         // Set selected brand in label
         txtSelected.setText(choiceBox.getValue());
+
+        // Clear the list of consoles
         yPane.getChildren().clear();
 
         // Load list of consoles for this brand

@@ -4,9 +4,9 @@ En aquest projecte hi ha un exemple de com comunicar JavaFX amb un servidor Node
 
 Captura amb JavaFX
 
-<img src="./ScreenshotJavaFX.png" width="400">
+<img src="./ScreenshotJavaFX0.png" width="400">
 
-
+<img src="./ScreenshotJavaFX1.png" width="400">
 
 Captura amb Web
 

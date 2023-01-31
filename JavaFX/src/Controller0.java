@@ -38,30 +38,13 @@ public class Controller0 implements Initializable {
     @FXML
     private VBox yPane = new VBox();
 
-    private ArrayList<String> brandsArr = new ArrayList<>();
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        // Start choiceBox
+        // Start choiceBox setting onaction event
         choiceBox.setOnAction((event) -> {
-            loadBrandList(choiceBox.getSelectionModel().getSelectedItem());
+            loadBrandConsoles(choiceBox.getSelectionModel().getSelectedItem());
         });
-    }
-
-    @FXML
-    public void loadGameCube() {
-        loadConsoleInfo("GameCube");
-    }
-
-    @FXML
-    public void loadXbox() {
-        loadConsoleInfo("Xbox One");
-    }
-
-    @FXML
-    public void loadPlaystation3() {
-        loadConsoleInfo("Playstation 3");
     }
 
     @FXML
@@ -82,6 +65,15 @@ public class Controller0 implements Initializable {
         }
     }
 
+    private void showError () {
+        // Show the error
+        txtError.setVisible(true);
+
+        // Hide the error after 3 seconds
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), ae -> txtError.setVisible(false)));
+        timeline.play();
+    }
+
     @FXML
     public void listBrands() {
         JSONObject obj = new JSONObject("{}");
@@ -99,17 +91,84 @@ public class Controller0 implements Initializable {
         JSONObject objResponse = new JSONObject(response);
 
         if (objResponse.getString("status").equals("OK")) {
+
             JSONArray JSONlist = objResponse.getJSONArray("result");
-            brandsArr.clear();
+            ArrayList<String> brandsArr = new ArrayList<>();
+
+            // Create arraylist with brands from JSON
             for (int i = 0; i < JSONlist.length(); i++) {
                 brandsArr.add(JSONlist.getString(i));
             }
 
+            // Set choicebox items with brands from arraylist
             choiceBox.getItems().clear();
             choiceBox.getItems().addAll(brandsArr);
             choiceBox.setValue(brandsArr.get(0));
 
-            loadBrandList(brandsArr.get(0));
+            // Load consoles for the first brand
+            loadBrandConsoles(brandsArr.get(0));
+        } else {
+            showError();
+        }
+    }
+
+    @FXML
+    private void loadBrandConsoles (String brand) {
+
+        // Set selected brand in label
+        txtSelected.setText(choiceBox.getValue());
+        yPane.getChildren().clear();
+
+        // Load list of consoles for this brand
+        JSONObject obj = new JSONObject("{}");
+        obj.put("type", "marca");
+        obj.put("name", brand);
+
+        // Ask for data
+        showLoading();
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
+            loadBrandConsolesCallback(response);
+            hideLoading();
+        });
+    }
+
+    private void loadBrandConsolesCallback (String response) {
+
+        JSONObject objResponse = new JSONObject(response);
+
+        if (objResponse.getString("status").equals("OK")) {
+
+            JSONArray JSONlist = objResponse.getJSONArray("result");
+            URL resource = this.getClass().getResource("./assets/listItem.fxml");
+
+            // Clear the list of consoles
+            yPane.getChildren().clear();
+
+            // Add received consoles from the JSON to the list
+            for (int i = 0; i < JSONlist.length(); i++) {
+
+                // Get console information
+                JSONObject console = JSONlist.getJSONObject(i);
+
+                try {
+                    // Load template and set controller
+                    FXMLLoader loader = new FXMLLoader(resource);
+                    Parent itemTemplate = loader.load();
+                    ControllerItem itemController = loader.getController();
+                
+                    // Fill template with console information
+                    itemController.setTitle(console.getString("name"));
+                    itemController.setSubtitle(console.getString("processor"));
+                    itemController.setColor("white");
+                    
+                    // Add template to the list
+                    yPane.getChildren().add(itemTemplate);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         } else {
             showError();
         }
@@ -129,19 +188,20 @@ public class Controller0 implements Initializable {
     }
 
     private void loadConsoleInfoCallback (String response) {
-        setConsoleInfo(response);
-    }
 
-    private void setConsoleInfo (String response) {
         JSONObject objResponse = new JSONObject(response);
+        
         if (objResponse.getString("status").equals("OK")) {
+
             JSONObject console = objResponse.getJSONObject("result");
 
+            // Fill console info with the received data
             txtName.setText(console.getString("name"));
             txtDate.setText(console.getString("date"));
             txtBrand.setText(console.getString("brand"));
     
             try{
+                // Load console image
                 Image image = new Image(Main.protocol + "://" + Main.host + ":" + Main.port + "/" + console.getString("image")); 
                 imgConsole.setImage(image); 
                 imgConsole.setFitWidth(200);
@@ -152,65 +212,5 @@ public class Controller0 implements Initializable {
         } else {
             showError();
         }
-    }
-
-    @FXML
-    private void loadBrandList (String brand) {
-
-        // Set selected brand in label
-        txtSelected.setText(choiceBox.getValue());
-        yPane.getChildren().clear();
-
-        // Load list of consoles for this brand
-        JSONObject obj = new JSONObject("{}");
-        obj.put("type", "marca");
-        obj.put("name", brand);
-
-        // Ask for data
-        showLoading();
-        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            loadBrandsListCallback(response);
-            hideLoading();
-        });
-    }
-
-    private void loadBrandsListCallback (String response) {
-
-        JSONObject objResponse = new JSONObject(response);
-
-        if (objResponse.getString("status").equals("OK")) {
-            JSONArray JSONlist = objResponse.getJSONArray("result");
-            URL resource = this.getClass().getResource("./assets/listItem.fxml");
-
-            yPane.getChildren().clear();
-            for (int i = 0; i < JSONlist.length(); i++) {
-                JSONObject console = JSONlist.getJSONObject(i);
-                FXMLLoader loader = new FXMLLoader(resource);
-                try {
-                    Parent itemTemplate = loader.load();
-                    ControllerItem itemController = loader.getController();
-                
-                    itemController.setTitle(console.getString("name"));
-                    itemController.setSubtitle(console.getString("processor"));
-                    itemController.setColor("white");
-                    
-                    yPane.getChildren().add(itemTemplate);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        } else {
-            showError();
-        }
-    }
-
-    private void showError () {
-        // Show the error
-        txtError.setVisible(true);
-
-        // Hide the error after 3 seconds
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), ae -> txtError.setVisible(false)));
-        timeline.play();
     }
 }

@@ -80,7 +80,7 @@ public class UtilsWS  extends WebSocketClient {
         System.out.println("WS reconnecting to: " + this.location);
 
         try {
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) { e.printStackTrace(); }
 
         Consumer<String> oldCallBack = this.onMessageCallBack;

@@ -187,7 +187,6 @@ public class Controller0 implements Initializable {
     }
 
     private void showError () {
-        
         // Show the error
         txtError.setVisible(true);
 

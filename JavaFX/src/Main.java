@@ -67,6 +67,7 @@ public class Main extends Application {
         stage.setMinHeight(windowHeight);
         stage.show();
 
+        // Add icon only if not Mac
         if (!System.getProperty("os.name").contains("Mac")) {
             Image icon = new Image("file:./assets/icon.png");
             stage.getIcons().add(icon);

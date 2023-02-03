@@ -1,3 +1,5 @@
+import java.net.InetAddress;
+
 import org.json.JSONObject;
 
 import javafx.application.Application;

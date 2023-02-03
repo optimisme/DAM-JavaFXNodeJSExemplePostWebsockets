@@ -1,11 +1,10 @@
-import java.net.InetAddress;
-
 import org.json.JSONObject;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -68,8 +67,11 @@ public class Main extends Application {
         stage.setMinHeight(windowHeight);
         stage.show();
 
-        // Image icon = new Image("file:./assets/icon.png");
-        // stage.getIcons().add(icon);
+        System.out.println(System.getProperty("os.name"));
+        if (!System.getProperty("os.name").contains("Mac")) {
+            Image icon = new Image("file:./assets/icon.png");
+            stage.getIcons().add(icon);
+        }
     }
 
     @Override

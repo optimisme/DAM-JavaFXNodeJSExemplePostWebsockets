@@ -59,6 +59,22 @@ async function getDades (req, res) {
       })
       result = { status: "OK", result: objBrandConsolesList } 
     }
+    if (receivedPOST.type == "uploadFile") {
+      
+      const fileBuffer = Buffer.from(receivedPOST.base64, 'base64');
+      const path = "./private"
+      await fs.mkdir(path, { recursive: true }) // Crea el directori si no existeix
+      await fs.writeFile(`${path}/${receivedPOST.name}`, fileBuffer)
+      
+      await wait(1500)
+      result = { status: "OK", name: receivedPOST.name } 
+    }
+    if (receivedPOST.type == "getBinaryFile") {
+      var name = receivedPOST.name
+      var base64 = await fs.readFile(`./private/${name}`, { encoding: 'base64'})
+      await wait(1500)
+      result = { status: "OK", name: name, base64: base64 } 
+    }
   }
 
   res.writeHead(200, { 'Content-Type': 'application/json' })

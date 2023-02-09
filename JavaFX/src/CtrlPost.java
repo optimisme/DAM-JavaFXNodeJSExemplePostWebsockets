@@ -20,7 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-public class Controller0 implements Initializable {
+public class CtrlPost implements Initializable {
 
     @FXML
     private Label txtName, txtDate, txtBrand, txtSelected, txtError;
@@ -48,8 +48,8 @@ public class Controller0 implements Initializable {
     }
 
     @FXML
-    private void setView1() {
-        UtilsViews.setViewAnimating("View1");
+    private void setViewSockets() {
+        UtilsViews.setViewAnimating("ViewSockets");
     }
 
     private void showLoading () {
@@ -156,7 +156,7 @@ public class Controller0 implements Initializable {
                     // Load template and set controller
                     FXMLLoader loader = new FXMLLoader(resource);
                     Parent itemTemplate = loader.load();
-                    ControllerItem itemController = loader.getController();
+                    CtrlListItem itemController = loader.getController();
                 
                     // Fill template with console information
                     itemController.setTitle(console.getString("name"));

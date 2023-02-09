@@ -31,19 +31,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        // Iniciar WebSockets
-        socketClient = UtilsWS.getSharedInstance(protocolWS + "://" + host + ":" + port);
-        socketClient.onMessage((response) -> {
-            
-            // JavaFX necessita que els canvis es facin des de el thread principal
-            Platform.runLater(()->{ 
-                // Fer aquí els canvis a la interficie
-                JSONObject msgObj = new JSONObject(response);
-                Controller1 ctrl = (Controller1) UtilsViews.getController("View1");
-                ctrl.receiveMessage(msgObj);
-            });
-        });
-
         // Iniciar app JavaFX   
         launch(args);
     }
@@ -55,8 +42,9 @@ public class Main extends Application {
         final int windowHeight = 600;
 
         UtilsViews.parentContainer.setStyle("-fx-font: 14 arial;");
-        UtilsViews.addView(getClass(), "View0", "./assets/view0.fxml");
-        UtilsViews.addView(getClass(), "View1", "./assets/view1.fxml");
+        UtilsViews.addView(getClass(), "ViewPost", "./assets/viewPost.fxml");
+        UtilsViews.addView(getClass(), "ViewSockets", "./assets/viewSockets.fxml");
+        UtilsViews.addView(getClass(), "ViewUpload", "./assets/viewUpload.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
         
@@ -72,6 +60,19 @@ public class Main extends Application {
             Image icon = new Image("file:./assets/icon.png");
             stage.getIcons().add(icon);
         }
+
+        // Iniciar WebSockets
+        socketClient = UtilsWS.getSharedInstance(protocolWS + "://" + host + ":" + port);
+        socketClient.onMessage((response) -> {
+            
+            // JavaFX necessita que els canvis es facin des de el thread principal
+            Platform.runLater(()->{ 
+                // Fer aquí els canvis a la interficie
+                JSONObject msgObj = new JSONObject(response);
+                CtrlSockets ctrl = (CtrlSockets) UtilsViews.getController("ViewSockets");
+                ctrl.receiveMessage(msgObj);
+            });
+        });
     }
 
     @Override

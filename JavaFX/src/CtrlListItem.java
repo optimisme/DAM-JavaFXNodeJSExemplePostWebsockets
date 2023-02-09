@@ -2,7 +2,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Polygon;
 
-public class ControllerItem {
+public class CtrlListItem {
     
     @FXML
     private Label title, subtitle;
@@ -12,7 +12,7 @@ public class ControllerItem {
 
     @FXML
     private void handleMenuAction() {
-        Controller0 c0 = (Controller0) UtilsViews.getController("View0");
+        CtrlPost c0 = (CtrlPost) UtilsViews.getController("ViewPost");
         c0.loadConsoleInfo(title.getText());
     }
 

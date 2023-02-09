@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" minHeight="500.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller1">
+<AnchorPane fx:id="anchor" minHeight="500.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CtrlSockets">
    <children>
       <Label alignment="CENTER" prefHeight="17.0" prefWidth="600.0" text="Crides WebSockets" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0">
          <font>
@@ -66,7 +66,12 @@
          </children>
       </GridPane>
       <TextArea fx:id="txtArea" editable="false" layoutX="86.0" layoutY="176.0" prefHeight="200.0" prefWidth="200.0" promptText="textArea" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="175.0" />
-      <Button fx:id="button01" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#setView0" prefHeight="25.0" style="-fx-background-color: white;" text="&lt; Crides Post" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
+      <Button fx:id="button01" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#setViewPost" prefHeight="25.0" style="-fx-background-color: white;" text="&lt; Crides Post" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="button011" layoutX="24.0" layoutY="30.0" mnemonicParsing="false" onAction="#setViewUpload" prefHeight="25.0" style="-fx-background-color: white;" text="Pujar arxius &gt;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="18.0" />
          </font>

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" minHeight="500.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller0">
+<AnchorPane fx:id="anchor" minHeight="500.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CtrlPost">
    <children>
       <HBox alignment="CENTER" layoutX="20.0" prefWidth="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -28,7 +28,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button fx:id="button01" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#setView1" prefHeight="25.0" style="-fx-background-color: white;" text="WebSockets &gt;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+      <Button fx:id="button01" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#setViewSockets" prefHeight="25.0" style="-fx-background-color: white;" text="WebSockets &gt;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="18.0" />
          </font>

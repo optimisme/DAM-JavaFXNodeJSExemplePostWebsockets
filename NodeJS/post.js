@@ -35,7 +35,7 @@ class Obj {
                         let keys = Object.keys(objPost)
                         for (let cnt = 0; cnt < keys.length; cnt = cnt + 1) {
                             let value = objPost[keys[cnt]]
-                            if (!isNaN(value)) {
+                            if (!isNaN(value)) { // Check if is a number (example: "2ABC" is not a 2)
                                 let valueInt = parseInt(value)
                                 let valueFlt = parseFloat(value)
                                 if (valueInt && valueFlt) {

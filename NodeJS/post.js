@@ -35,11 +35,13 @@ class Obj {
                         let keys = Object.keys(objPost)
                         for (let cnt = 0; cnt < keys.length; cnt = cnt + 1) {
                             let value = objPost[keys[cnt]]
-                            let valueInt = parseInt(value)
-                            let valueFlt = parseFloat(value)
-                            if (valueInt && valueFlt) {
-                                if (valueInt == valueFlt) objPost[keys[cnt]] = valueInt
-                                else objPost[keys[cnt]] = valueFlt
+                            if (!isNaN(value)) {
+                                let valueInt = parseInt(value)
+                                let valueFlt = parseFloat(value)
+                                if (valueInt && valueFlt) {
+                                    if (valueInt == valueFlt) objPost[keys[cnt]] = valueInt
+                                    else objPost[keys[cnt]] = valueFlt
+                                }
                             }
                         }
                         return resolve(objPost)

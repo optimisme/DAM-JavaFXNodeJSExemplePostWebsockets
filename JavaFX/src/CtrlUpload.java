@@ -66,8 +66,8 @@ public class CtrlUpload {
 
     private void uploadFile (File selectedFile) {
 
-        // Read image from File and convert to Base64
         try {
+            // Read image from File and convert to Base64
             byte[] fileContent = Files.readAllBytes(selectedFile.toPath());
             String name = selectedFile.getName();
             String base64 = Base64.getEncoder().encodeToString(fileContent);
@@ -89,6 +89,7 @@ public class CtrlUpload {
     private void uploadFileCallback (String response) {
 
         JSONObject objResponse = new JSONObject(response);
+        
         if (objResponse.getString("status").equals("OK")) {
 
             getBinaryFile(objResponse.getString("name"));

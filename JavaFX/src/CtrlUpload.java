@@ -1,21 +1,12 @@
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.ResourceBundle;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -89,7 +80,7 @@ public class CtrlUpload {
     private void uploadFileCallback (String response) {
 
         JSONObject objResponse = new JSONObject(response);
-        
+
         if (objResponse.getString("status").equals("OK")) {
 
             getBinaryFile(objResponse.getString("name"));

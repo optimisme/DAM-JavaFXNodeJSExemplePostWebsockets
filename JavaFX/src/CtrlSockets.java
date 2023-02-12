@@ -31,10 +31,10 @@ public class CtrlSockets implements Initializable {
 
         // Start choiceBox
         choiceType.getItems().clear();
-        choiceType.getItems().addAll("Broadcast", "Bounce", "Private");
-        choiceType.setValue("Broadcast");
+        choiceType.getItems().addAll("broadcast", "bounce", "private");
+        choiceType.setValue(choiceType.getItems().get(0));
         choiceType.setOnAction((event) -> {
-            if (choiceType.getValue().equals("Private")) {
+            if (choiceType.getValue().equals("private")) {
                 choiceUser.setDisable(false);
             } else {
                 choiceUser.setDisable(true);

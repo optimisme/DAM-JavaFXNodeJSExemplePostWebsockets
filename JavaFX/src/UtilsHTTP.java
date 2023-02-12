@@ -12,14 +12,22 @@ import javafx.concurrent.Task;
 public class UtilsHTTP {
 
     public static void sendGET(String url, Consumer<String> callBack) {
-        send("GET", url, "", callBack);
+        send("GET", url, "", "", callBack);
+	}
+
+    public static void sendGET(String url, String cookie, Consumer<String> callBack) {
+        send("GET", url, cookie, "", callBack);
 	}
 
     public static void sendPOST(String url, String post_params, Consumer<String> callBack) {
-        send("POST", url, post_params, callBack);
+        send("POST", url, "", post_params, callBack);
 	}
 
-    private static void send(String type, String url, String post_params, Consumer<String> callBack) {
+    public static void sendPOST(String url, String cookie, String post_params, Consumer<String> callBack) {
+        send("POST", url, cookie, post_params, callBack);
+	}
+
+    private static void send(String type, String url, String cookie, String post_params, Consumer<String> callBack) {
 
         // Create a new thread to send the request
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -31,7 +39,10 @@ public class UtilsHTTP {
                     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
                     con.setRequestMethod(type);
                     con.setRequestProperty("User-Agent", "Mozilla/5.0");
-            
+                    if (!cookie.equals("")) {
+                        con.setRequestProperty("Cookie", cookie);
+                    }
+
                     if (type.equals("POST")) {
                         con.setDoOutput(true);
                         OutputStream os = con.getOutputStream();

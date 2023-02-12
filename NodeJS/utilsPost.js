@@ -54,6 +54,24 @@ class Obj {
             })
         })
     }
+
+    static getCookiesObject (req) {
+
+        // Get cookies from request
+        const cookies = req.headers?.cookie
+        if (!cookies) { return  null }
+
+        // Parse cookies into an object
+        const cookiesArray = cookies.split(';')
+        const cookiesObject = {}
+        cookiesArray.forEach((cookie) => {
+            const cookieArray = cookie.split('=')
+            if (cookieArray.length == 2) {
+                cookiesObject[cookieArray[0].trim()] = cookieArray[1].trim()
+            }
+        })
+        return cookiesObject
+    }
 }
 
 // Export

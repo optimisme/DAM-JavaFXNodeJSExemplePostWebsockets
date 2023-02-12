@@ -83,24 +83,24 @@ public class CtrlUpload {
 
         if (objResponse.getString("status").equals("OK")) {
 
-            getBinaryFile(objResponse.getString("name"));
+            getPrivateFile(objResponse.getString("name"));
         }
     }
 
-    private void getBinaryFile (String name) {
+    private void getPrivateFile (String name) {
 
         JSONObject obj = new JSONObject("{}");
-        obj.put("type", "getBinaryFile");
+        obj.put("type", "getPrivateFile");
         obj.put("name", name);
 
         showLoading();
         UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            getBinaryFileCallback(response);
+            getPrivateFileCallback(response);
             hideLoading();
         });
     }
 
-    private void getBinaryFileCallback (String response) {
+    private void getPrivateFileCallback (String response) {
 
         JSONObject objResponse = new JSONObject(response);
 

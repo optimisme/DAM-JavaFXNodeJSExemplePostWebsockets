@@ -66,9 +66,7 @@ public class UtilsHTTP {
                         
                     } else {
                         System.out.println(type + " request did not work.");
-                        Platform.runLater(()->{  // Platform.runLater is used for JavaFX
-                            callBackHandler(errorStr, callBack);
-                        });
+                        callBackHandler(errorStr, callBack);
                     }
                 } catch (Exception e) {
                     System.out.println(type + " request error.");
@@ -85,14 +83,23 @@ public class UtilsHTTP {
             callBack.accept(result);
         });
 
-        // Code for Android ?
+        // Code for Android
         /* 
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+        new Handler(Looper.getMainLooper()).post(new Runnable () {
             @Override
+            public void run () {
+                callBack.accept(result);
+            }
+        });
+        */
+
+        // Code for Swing
+        /* 
+        SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 callBack.accept(result);
             }
-        }, 3000);
+        });
         */
     }
 }

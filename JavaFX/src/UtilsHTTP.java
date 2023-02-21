@@ -62,23 +62,37 @@ public class UtilsHTTP {
                             response.append(inputLine);
                         }
                         in.close();
-                        Platform.runLater(()->{ // Platform.runLater is used for JavaFX
-                            callBack.accept(response.toString());
-                        });
+                        callBackHandler(response.toString(), callBack);
                         
                     } else {
                         System.out.println(type + " request did not work.");
                         Platform.runLater(()->{  // Platform.runLater is used for JavaFX
-                            callBack.accept(errorStr);
+                            callBackHandler(errorStr, callBack);
                         });
                     }
                 } catch (Exception e) {
                     System.out.println(type + " request error.");
-                    Platform.runLater(()->{  // Platform.runLater is used for JavaFX
-                        callBack.accept(errorStr);
-                    });
+                    callBackHandler(errorStr, callBack);
                 }
             }
         });
 	}
+
+    static private void callBackHandler(String result, Consumer<String> callBack) {
+
+        // Code for JavaFX
+        Platform.runLater(()->{
+            callBack.accept(result);
+        });
+
+        // Code for Android ?
+        /* 
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                callBack.accept(result);
+            }
+        }, 3000);
+        */
+    }
 }

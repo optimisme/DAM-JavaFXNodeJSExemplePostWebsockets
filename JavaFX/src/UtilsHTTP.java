@@ -78,6 +78,9 @@ public class UtilsHTTP {
 
     static private void callBackHandler(String result, Consumer<String> callBack) {
 
+        // Code for Java
+        // callBack.accept(result);
+
         // Code for JavaFX
         Platform.runLater(()->{
             callBack.accept(result);

@@ -62,19 +62,19 @@ public class UtilsHTTP {
                             response.append(inputLine);
                         }
                         in.close();
-                        Platform.runLater(()->{ 
+                        Platform.runLater(()->{ // Platform.runLater is used for JavaFX
                             callBack.accept(response.toString());
                         });
                         
                     } else {
                         System.out.println(type + " request did not work.");
-                        Platform.runLater(()->{ 
+                        Platform.runLater(()->{  // Platform.runLater is used for JavaFX
                             callBack.accept(errorStr);
                         });
                     }
                 } catch (Exception e) {
                     System.out.println(type + " request error.");
-                    Platform.runLater(()->{ 
+                    Platform.runLater(()->{  // Platform.runLater is used for JavaFX
                         callBack.accept(errorStr);
                     });
                 }

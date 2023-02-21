@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-import javafx.concurrent.Task;
+import javafx.application.Platform;
 
 public class UtilsHTTP {
 
@@ -30,10 +30,11 @@ public class UtilsHTTP {
     private static void send(String type, String url, String cookie, String post_params, Consumer<String> callBack) {
 
         // Create a new thread to send the request
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Task<String> task = new Task<>() {
-            @Override 
-            protected String call() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                String errorStr = "{ \"status\": \"KO\", \"result\": \"Error on " + type + " request\" }";
                 try {
                     URL obj = new URL(url);
                     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -52,7 +53,6 @@ public class UtilsHTTP {
                     }
             
                     int responseCode = con.getResponseCode();
-            
                     if (responseCode == HttpURLConnection.HTTP_OK) { //success
                         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                         String inputLine;
@@ -62,23 +62,23 @@ public class UtilsHTTP {
                             response.append(inputLine);
                         }
                         in.close();
-
-                        return response.toString();
+                        Platform.runLater(()->{ 
+                            callBack.accept(response.toString());
+                        });
+                        
                     } else {
                         System.out.println(type + " request did not work.");
+                        Platform.runLater(()->{ 
+                            callBack.accept(errorStr);
+                        });
                     }
                 } catch (Exception e) {
                     System.out.println(type + " request error.");
+                    Platform.runLater(()->{ 
+                        callBack.accept(errorStr);
+                    });
                 }
-                return "{ \"status\": \"KO\", \"result\": \"Error on " + type + " request\" }";
             }
-        };
-
-        task.setOnSucceeded(event -> {
-            callBack.accept(task.getValue());
-            executorService.shutdownNow();
         });
-        
-        executorService.execute(task); 
 	}
 }

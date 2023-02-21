@@ -63,7 +63,7 @@ public class UtilsHTTP {
                         }
                         in.close();
                         callBackHandler(response.toString(), callBack);
-                        
+
                     } else {
                         System.out.println(type + " request did not work.");
                         callBackHandler(errorStr, callBack);

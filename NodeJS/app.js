@@ -41,7 +41,7 @@ db.init({
   password: process.env.MYSQLPASSWORD || "",
   database: process.env.MYSQLDATABASE || "test"
 })
-ws.init(httpServer, port, db)
+ws.init(httpServer, port, db) // Start websockets
 
 // Define routes
 app.post('/dades', getPostDades)

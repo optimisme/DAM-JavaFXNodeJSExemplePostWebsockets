@@ -2,9 +2,18 @@
 
 En aquest projecte hi ha exemples de comunicar JavaFX amb NodeJS
 
-### Compilació i funcionament ###
+A Visual Studio Code obrir el workspace JavaFX.code-workspace
 
-Amb l'extensió "Task Runner" de Sana Ajani, o bé des de la línia de comandes
+Després compilar i executar un servidor:
+
+A la carpeta 'NodeJS' executar:
+
+```
+npm install
+npm run dev
+```
+
+A la carpeta 'JavaFX' executar un o més clients:
 
 A Linux i OSX:
 

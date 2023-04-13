@@ -5,10 +5,7 @@ const { v4: uuidv4 } = require('uuid')
 
 class Obj {
 
-    init (httpServer, port, db) {      
-
-        // Set reference to database
-        this.db = db
+    init (httpServer, port) {      
 
         // Define empty callbacks
         this.onConnection = (socket, id) => {}

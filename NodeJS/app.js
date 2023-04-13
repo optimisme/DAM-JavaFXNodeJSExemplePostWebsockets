@@ -42,11 +42,13 @@ db.init({
   database: process.env.MYSQLDATABASE || "test"
 })
 
-ws.init(httpServer, port, db) 
+ws.init(httpServer, port) 
 ws.onConnection = (socket, id) => {
+  // Aquest mètode es crida quan hi ha una nova connexió WebSocket
   console.log("WebSocket client connected")
 }
 ws.onMessage = (socket, id, obj) => {
+  // Aquest mètode es crida quan es rep un missatge per WebSocket
   if (obj.type == "bounce") {
     var rst = { type: "bounce", message: obj.message }
     socket.send(JSON.stringify(rst))

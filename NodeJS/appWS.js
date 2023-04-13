@@ -5,10 +5,14 @@ const { v4: uuidv4 } = require('uuid')
 
 class Obj {
 
-    init (httpServer, port, db) {
+    init (httpServer, port, db) {      
 
         // Set reference to database
         this.db = db
+
+        // Define empty callbacks
+        this.onConnection = (socket, id) => {}
+        this.onMessage = (socket, id, obj) => { }
 
         // Run WebSocket server
         this.wss = new WebSocket.Server({ server: httpServer })
@@ -36,6 +40,9 @@ class Obj {
 
         // Send clients list to everyone
         this.sendClients()
+        if (this.onConnection && typeof this.onConnection === "function") {
+            this.onConnection(ws, id)
+        }
 
         // What to do when a client is disconnected
         ws.on("close", () => { this.socketsClients.delete(ws)  })
@@ -88,19 +95,8 @@ class Obj {
         try { messageAsObject = JSON.parse(messageAsString) } 
         catch (e) { console.log("Could not parse bufferedMessage from WS message") }
 
-        if (messageAsObject.type == "bounce") {
-            var rst = { type: "bounce", message: messageAsObject.message }
-            ws.send(JSON.stringify(rst))
-
-        } else if (messageAsObject.type == "broadcast") {
-
-            var rst = { type: "broadcast", origin: id, message: messageAsObject.message }
-            this.broadcast(rst)
-
-        } else if (messageAsObject.type == "private") {
-
-            var rst = { type: "private", origin: id, destination: messageAsObject.destination, message: messageAsObject.message }
-            this.private(rst)
+        if (this.onMessage && typeof this.onMessage === "function") {
+            this.onMessage(ws, id, messageAsObject)
         }
     }
 }

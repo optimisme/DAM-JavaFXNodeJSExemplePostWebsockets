@@ -41,7 +41,27 @@ db.init({
   password: process.env.MYSQLPASSWORD || "",
   database: process.env.MYSQLDATABASE || "test"
 })
-ws.init(httpServer, port, db) // Start websockets
+
+ws.init(httpServer, port, db) 
+ws.onConnection = (socket, id) => {
+  console.log("WebSocket client connected")
+}
+ws.onMessage = (socket, id, obj) => {
+  if (obj.type == "bounce") {
+    var rst = { type: "bounce", message: obj.message }
+    socket.send(JSON.stringify(rst))
+  
+  } else if (obj.type == "broadcast") {
+  
+    var rst = { type: "broadcast", origin: id, message: obj.message }
+    ws.broadcast(rst)
+  
+  } else if (obj.type == "private") {
+  
+    var rst = { type: "private", origin: id, destination: obj.destination, message: obj.message }
+    ws.private(rst)
+  }
+}
 
 // Define routes
 app.post('/dades', getPostDades)
@@ -105,3 +125,4 @@ async function getPostDades (req, res) {
   res.writeHead(200, { 'Content-Type': 'application/json' })
   res.end(JSON.stringify(result))
 }
+

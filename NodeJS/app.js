@@ -1,10 +1,10 @@
 const express     = require('express')
 const fs          = require('fs').promises
 
-const webSockets  = require('./appWS.js')
 const post        = require('./utilsPost.js')
 const database    = require('./utilsMySQL.js')
 const wait        = require('./utilsWait.js')
+const webSockets  = require('./utilsWebSockets.js')
 
 var db = new database()   // Database example: await db.query("SELECT * FROM test")
 var ws = new webSockets()

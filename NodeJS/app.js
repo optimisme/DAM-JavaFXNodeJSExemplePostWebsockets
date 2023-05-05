@@ -45,7 +45,7 @@ db.init({
 ws.init(httpServer, port) 
 ws.onConnection = (socket, id) => {
   // Aquest mètode es crida quan hi ha una nova connexió WebSocket
-  console.log("WebSocket client connected")
+  console.log("WebSocket client connected: " + id)
 }
 ws.onMessage = (socket, id, obj) => {
   // Aquest mètode es crida quan es rep un missatge per WebSocket
@@ -63,6 +63,10 @@ ws.onMessage = (socket, id, obj) => {
     var rst = { type: "private", origin: id, destination: obj.destination, message: obj.message }
     ws.private(rst)
   }
+}
+ws.onClose = (socket, id) => {
+  // Aquest mètode es crida quan hi ha una desconnexió d'un client WebSocket
+  console.log("WebSocket client disconnected: " + id)
 }
 
 // Define routes

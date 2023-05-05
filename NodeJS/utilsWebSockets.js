@@ -10,6 +10,7 @@ class Obj {
         // Define empty callbacks
         this.onConnection = (socket, id) => {}
         this.onMessage = (socket, id, obj) => { }
+        this.onClose = (socket, id) => { }
 
         // Run WebSocket server
         this.wss = new WebSocket.Server({ server: httpServer })
@@ -42,10 +43,20 @@ class Obj {
         }
 
         // What to do when a client is disconnected
-        ws.on("close", () => { this.socketsClients.delete(ws)  })
+        ws.on("close", () => {
+            this.closeConnection(ws)
+            this.socketsClients.delete(ws)  
+        })
 
         // What to do when a client message is received
         ws.on('message', (bufferedMessage) => { this.newMessage(ws, id, bufferedMessage)})
+    }
+
+    closeConnection (ws) {
+        if (this.onClose && typeof this.onClose === "function") {
+            var id = this.socketsClients.get(ws).id
+            this.onClose(ws, id)
+        }
     }
 
     // Send clientsIds to everyone connected with websockets

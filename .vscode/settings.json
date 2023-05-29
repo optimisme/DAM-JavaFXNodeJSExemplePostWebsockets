@@ -5,9 +5,4 @@
   "java.project.referencedLibraries": [
     "JavaFX/Project/lib/**/*.jar"
   ]
-<<<<<<< HEAD
 }
-=======
-}
-  
->>>>>>> 414c492 (Use Project / Release folders for JavaFX)

@@ -1,15 +1,24 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-      {
-        "label": "Compile Project",
-        "type": "shell",
-        "command": "cd JavaFX && ./compile.sh && cd ..",
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        }
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile for UNIX",
+      "type": "shell",
+      "command": "cd JavaFX && ./build.sh && cd ..",
+      "group": {
+        "kind": "build",
+        "isDefault": true
       }
-    ]
-  }
+    },
+    {
+      "label": "Compile for PowerShell",
+      "type": "shell",
+      "command": "cd JavaFX && ./build.ps1 && cd ..",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
   

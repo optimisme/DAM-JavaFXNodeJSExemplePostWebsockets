@@ -27,9 +27,5 @@ Temporary Items
 bin/*
 
 # Ignore release folder
-<<<<<<< HEAD
 Release/
-=======
-Release
->>>>>>> 414c492 (Use Project / Release folders for JavaFX)
 node_modules

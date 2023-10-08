@@ -1,8 +1,0 @@
-{
-  "java.project.sourcePaths": [
-    "JavaFX/Project/src"
-  ],
-  "java.project.referencedLibraries": [
-    "JavaFX/Project/lib/**/*.jar"
-  ]
-}

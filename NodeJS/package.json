@@ -7,16 +7,17 @@
   "license": "ISC",
   "dependencies": {
     "express": "latest",
-    "forever": "^4.0.3",
+    "pm2": "^5.3.0",
     "mysql2": "^3.0.1",
     "nodemon": "latest",
-    "uuid": "^9.0.0",
+    "uuid": "^9.0.1",
     "ws": "^8.12.0"
   },
   "scripts": {
     "dev": "nodemon app.js",
-    "app": "forever app.js",
-    "start": "forever app.js"
+    "app": "pm2 start ./app.js",
+    "pm2List": "pm2 list",
+    "pm2Delete": "pm2 delete app"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.7",

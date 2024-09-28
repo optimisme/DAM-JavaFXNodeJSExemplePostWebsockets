@@ -2,6 +2,7 @@ package com.project;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 import org.java_websocket.client.WebSocketClient;
@@ -14,6 +15,7 @@ public class UtilsWS  extends WebSocketClient {
     public static UtilsWS sharedInstance = null;
     private Consumer<String> onMessageCallBack = null;
     private String location = "";
+    private static AtomicBoolean exitRequested = new AtomicBoolean(false); // Thread safe
 
     private UtilsWS (String location, Draft draft) throws URISyntaxException {
         super (new URI(location), draft);
@@ -28,7 +30,7 @@ public class UtilsWS  extends WebSocketClient {
                 sharedInstance.connect();
             } catch (URISyntaxException e) { 
                 e.printStackTrace(); 
-                System.out.println("Error: " + location + " no és una direcció URI de WebSocket vàlida");
+                System.out.println("WS Error, " + location + " is not a valid URI");
             }
         }
 
@@ -61,9 +63,9 @@ public class UtilsWS  extends WebSocketClient {
     }
 
     @Override
-    public void onError(Exception ex) {
-        System.out.println("WS connectio error: " + ex.getMessage());
-        if (ex.getMessage().contains("Connection refused") || ex.getMessage().contains("Connection reset")) {
+    public void onError(Exception e) {
+        System.out.println("WS connection error: " + e.getMessage());
+        if (e.getMessage().contains("Connection refused") || e.getMessage().contains("Connection reset")) {
             reconnect();
         }
     }
@@ -71,19 +73,25 @@ public class UtilsWS  extends WebSocketClient {
     public void safeSend(String text) {
         try {
             sharedInstance.send(text);
-        } catch (Exception ex) {
-            System.out.println("Error al enviar el missatge");
-            System.out.println(ex);
+        } catch (Exception e) {
+            System.out.println("WS Error sending message");
         }
     }
 
     public void reconnect () {
+        if (exitRequested.get()) { return; }
+    
         System.out.println("WS reconnecting to: " + this.location);
 
         try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) { e.printStackTrace(); }
-
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            System.out.println("WD Error, waiting");
+            Thread.currentThread().interrupt();  // Assegurar que el fil es torna a interrompre correctament
+        }
+    
+        if (exitRequested.get()) { return; }
+        
         Consumer<String> oldCallBack = this.onMessageCallBack;
         String oldLocation = this.location;
         sharedInstance.close();
@@ -91,4 +99,18 @@ public class UtilsWS  extends WebSocketClient {
         getSharedInstance(oldLocation);
         sharedInstance.onMessage(oldCallBack);
     }
+    
+    public void forceExit () {
+        System.out.println("WS Closing ...");
+        exitRequested.set(true);
+        try {
+            if (!isClosed()) {
+                super.closeBlocking();
+            }
+        } catch (Exception e) {
+            System.out.println("WS Interrupted while closing WebSocket connection");
+            Thread.currentThread().interrupt();
+        }
+    }
+    
 }

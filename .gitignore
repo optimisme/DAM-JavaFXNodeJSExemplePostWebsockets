@@ -30,5 +30,14 @@ bin/*
 Release/
 node_modules
 
+target/
 target/classes
 target/maven-status
+target/surefire-reports
+*.class
+dades.sqlite
+
+.continue
+
+# Ignore pycache
+__pycache__
